@@ -1,6 +1,6 @@
 # Site Info
-title: Codinfox Lanyon
-tagline: 'A Jekyll theme based on Lanyon'
+title: LEE YONGJUN
+tagline: '좋은 것은 나눠야지!'
 description: 'A Jekyll theme adapted from <a href="http://lanyon.getpoole.com/" target="_blank">Lanyon</a>. Made by <a href="http://codinfox.github.io" target="_blank">@codinfox</a>.'
 baseurl: "/"
 url: http://wooooooak.github.io
@@ -25,7 +25,7 @@ version: 1.0.0
 # About/contact
 author:
   name: wooooooak
-  description: A passionate <strong>developer and researcher</strong>, learning to be a giant.
+  description: 잘 적어놓고 실수는 한번만 합시다 :D
   gravatar: 3c2986ad7ac1f2230ea3596f44563328 # md5 hash of your email address
   contact:
     linkedin:  https://www.linkedin.com/in/lizhihao
