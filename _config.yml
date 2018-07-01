@@ -26,10 +26,10 @@ version: 1.0.0
 author:
   name: wooooooak
   description: 잘 적어놓고 실수는 한번만 합시다 :D
-  gravatar: 3c2986ad7ac1f2230ea3596f44563328 # md5 hash of your email address
+  gravatar: 2306050fb6056c56f715299aac42215d # md5 hash of your email address
   contact:
-    linkedin:  https://www.linkedin.com/in/lizhihao
     github:    https://github.com/wooooooak
+    # linkedin:  https://www.linkedin.com/in/lizhihao
     # facebook:  <hide>
     # twitter:   https://twitter.com/Li_Zhihao
     # weibo:     http://weibo.com/41173780
