@@ -56,3 +56,7 @@ console.log(a == b) // true
 
 ### 결론
 쉽고 깔끔하고 쿨하게 ===를 사용하자.
+
+### 참고자료
+* [MDN web docs 동치 비교 및 동일성](https://developer.mozilla.org/ko/docs/Web/JavaScript/Equality_comparisons_and_sameness)
+* [전현준 님의 블로그(Javascript '=='와 '===' 연산자 차이)](http://guswnsxodlf.github.io/javascript-equal-operator)
