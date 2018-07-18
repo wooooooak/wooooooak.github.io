@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 유용한 개발 라이브러리들 or 사이트
-category: FrontEnd
-tags: [library, react.js]
+category: Frontend
+tags: [library, React]
 comments: true
 ---
 
