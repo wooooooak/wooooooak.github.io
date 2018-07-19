@@ -1,6 +1,6 @@
 # Site Info
-title: WhyJ
-tagline: '좋은 것은 나눠야지! - 개발 블로그'
+title: elecoder
+tagline: ' 반복없는 실수를 위한 개발 블로그'
 description: 'A Jekyll theme adapted from <a href="http://lanyon.getpoole.com/" target="_blank">Lanyon</a>. Made by <a href="http://codinfox.github.io" target="_blank">@codinfox</a>.'
 baseurl: "/"
 url: http://wooooooak.github.io
@@ -33,7 +33,7 @@ author:
     # facebook:  <hide>
     # twitter:   https://twitter.com/Li_Zhihao
     # weibo:     http://weibo.com/41173780
-    # email:     http://www.google.com/recaptcha/mailhide/d?k=01I3lZFiZYng9N3QxYEtsDaQ==&c=31wAnZkuKqcG0ATAqJN8Z3ln5kkYLA9TwkGc-IbygpM=
+    email:     http://www.google.com/recaptcha/mailhide/d?k=01I3lZFiZYng9N3QxYEtsDaQ==&c=31wAnZkuKqcG0ATAqJN8Z3ln5kkYLA9TwkGc-IbygpM=
 
 # Navigation (2nd level links supported)
 nav:
