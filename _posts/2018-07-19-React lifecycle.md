@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 사이드바 외부 클릭시 사이드바 닫히게 하는 방법
+title: React Lifecycle 정리
 category: Frontend
 tags: [React]
 comments: true
