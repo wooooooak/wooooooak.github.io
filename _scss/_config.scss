@@ -2,6 +2,7 @@
  * Based on colors from Base16: http://chriskempson.github.io/base16/#default.
  */
  @import url('https://fonts.googleapis.com/css?family=Gaegu');
+ @import url('https://fonts.googleapis.com/css?family=Jua');
 
 $red:      #ac4142;
 $orange:   #d28445;
@@ -12,7 +13,7 @@ $blue:     #6a9fb5;
 $magenta:  #aa759f;
 $brown:    #8f5536;
 $default:  #505050;
-$mint:     #48D8D0;
+$mint:     #67D5B5;
 
 $white:      #fff;
 $lightgrey:  #eee;
@@ -31,5 +32,5 @@ $overlay-sidebar: false;
 
 /* Font stack */
 $font-serif: "PT Serif", Georgia, "Times New Roman", serif;
-$font-sans: "Gaegu","PT Sans", Helvetica, Arial, sans-serif;
+$font-sans: "Jua","Gaegu","PT Sans", Helvetica, Arial, sans-serif;
 $font-font-awesome: FontAwesome;
