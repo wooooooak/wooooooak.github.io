@@ -53,8 +53,8 @@ tag_page: '/blog/tags/'
 category_page: '/blog/categories/'
 
 hero:
-  # image: /public/img/computer-2982270_960_720.jpg
-  caption: '내가 밝히는 빛이 환하지 않아도 그로써 길을 찾는 사람이 있다'
+  image: /public/img/main.jpg
+  caption: ''
 
 # Puglins
 mathjax: true # whether support mathjax
