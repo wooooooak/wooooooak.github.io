@@ -6,11 +6,9 @@ tags: [typescript, default_type, 타입스크립트 퀵스타트]
 comments: true
 ---
 
-void 설명할 때, 112p 맨 밑에 설명을 참고하자
-변수를 선언할 때 값을 할당하지 않았음을 나타내기 위해 선언한 변수에 null을 할당하는 것은 권장하는 방법이 아니다.
 
 ## 타입 스트립트는 점진적 타입 검사
-javad와 C++은 타입의 생략이 불가능하며 실행 시간 전에 타입 검사를 하는 정적 타입 검사이다. 반면 자바스크립트는 실행 시간에 동적으로 타입 검사를 하는 동적 타입 검사를 가진다.
+java와 C++은 타입의 생략이 불가능하며 실행 시간 전에 타입 검사를 하는 정적 타입 검사이다. 반면 자바스크립트는 실행 시간에 동적으로 타입 검사를 하는 동적 타입 검사를 가진다.
 **타입스크립트**는 점진적 타입 검사를 가진다(파이썬도 그렇단다). 컴파일 시간에 타입 검사를 수행하면서 필요에 따라 타입 선언의 생략을 허용하기도 한다.
 ## 기본적인 타입
 ### 기본 타입
@@ -65,8 +63,8 @@ let x: string | number;
 인터섹션 타입: 두 타입을 합쳐 하나로 만들 수 있는 타입 (&)
 {% highlight typescript %}
 interface Cat { leg: number;}
-interface Bird {wing: number;}
-let birdCat: Cat & Bird = {leg: 4, wing: 2};
+interface Bird { wing: number;}
+let birdCat: Cat & Bird = { leg: 4, wing: 2 };
 {% endhighlight %}
 
 void, null, undefined
