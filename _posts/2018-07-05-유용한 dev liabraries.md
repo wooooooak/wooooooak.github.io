@@ -15,3 +15,5 @@ comments: true
 5. [typography](https://kyleamathews.github.io/typography.js/)
 6. [auth0](https://auth0.com/)
 7. [react-apollo](https://github.com/apollographql/react-apollo)
+8. [react-animate-on-scroll](https://www.npmjs.com/package/react-animate-on-scroll)
+9. [Styled Icons](https://styled-icons.js.org/)
