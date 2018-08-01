@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Typescript Quickstart 공부5. 타입선언과 변경, 타입 호환
+title: Typescript Quickstart 공부6. 타입선언과 변경, 타입 호환
 category: typescript
 tags: [typescript, 타입스크립트 퀵스타트]
 comments: true
