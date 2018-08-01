@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Typescript Quickstart 공부2. 클래스와 인터페이스
+title: Typescript Quickstart 공부3. 클래스와 인터페이스
 category: typescript
 tags: [typescript, 타입스크립트 퀵스타트]
 comments: true

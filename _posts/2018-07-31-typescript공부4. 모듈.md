@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Typescript Quickstart 공부2. 모듈
+title: Typescript Quickstart 공부4. 모듈
 category: typescript
 tags: [typescript, 타입스크립트 퀵스타트]
 comments: true
