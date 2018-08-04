@@ -18,7 +18,7 @@
   position: fixed;
   top: 0;
   bottom: 0;
-  width: 14rem;
+  width: 15rem;
   visibility: hidden;
   overflow-y: auto;
   font-family: "PT Sans", Helvetica, Arial, sans-serif;
@@ -208,6 +208,9 @@ a.sidebar-nav-item:focus {
     a, strong {
       color: $white;
       text-decoration: none;
+    }
+    p {
+      color: #404146;
     }
   }
 }
