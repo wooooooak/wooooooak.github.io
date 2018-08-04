@@ -92,7 +92,7 @@ Person.prototype.head = 1;
 ```
 console.log(song.head);
 ```
-와 같이 출력해도 js가 알아서 __prototype__을 뒤져 head값을 찾고 출력해줍니다. 또 사진을 봅시다.
+와 같이 출력해도 js가 알아서 __proto__을 뒤져 head값을 찾고 출력해줍니다. 또 사진을 봅시다.
 
 ![prototype4](/public/img/prototype/four.JPG)
 
