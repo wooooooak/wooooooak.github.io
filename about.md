@@ -22,4 +22,4 @@ title: About
 * Football
 * Toy project
 
-### 감사합니다!
+### 그럼 20000
