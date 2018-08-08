@@ -13,18 +13,19 @@ $blue:     #6a9fb5;
 $magenta:  #aa759f;
 $brown:    #8f5536;
 $default:  #505050;
-$mint:     #67D5B5;
+$mint:     #17E5BC;
+$back: #000D33;
 
 $white:      #fff;
 $lightgrey:  #eee;
 $black:      #000;
 
-$theme-color: $mint;
+$theme-color: $back;
 $theme-color-dark: darken($theme-color, 15%);
 
 $post-date-color: #9a9a9a;
 $post-title: #1F2124;
-$sidebar-text: #011627;
+$sidebar-text: $mint;
 $title-color: #313131;
 $masthead-title-small-color: #221E1F;
 
