@@ -23,7 +23,7 @@
   overflow-y: auto;
   font-family: "PT Sans", Helvetica, Arial, sans-serif;
   font-size: .875rem; /* 15px */
-  color: #566270;
+  color: rgb(168, 255, 238);
   @include transition(all .3s ease-in-out);
 
   @if $reverse-layout {

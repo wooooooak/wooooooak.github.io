@@ -36,6 +36,9 @@
     }
   }
   .tags-expo-section {
+    h2 {
+      color: $mint;
+    }
     ul {
       list-style-type: circle;
       list-style-position: inside;
