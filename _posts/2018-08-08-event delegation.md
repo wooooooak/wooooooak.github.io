@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 이벤트 위임(event delegation) feat. bubbling and capture
+title: 이벤트 위임(event delegation) feat.bubbling and capture
 category: javacript
 tags: [basic, event]
 comments: true 
