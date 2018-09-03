@@ -1,6 +1,6 @@
 ---
 layout: post
-title: AWS s3 AccessDenied error
+title: Cannot add foreign key constraint
 category: error
 tags: [sequelize, database]
 comments: true
