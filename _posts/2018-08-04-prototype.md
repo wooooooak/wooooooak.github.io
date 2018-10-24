@@ -14,7 +14,7 @@ comments: true
 es6에서는 class문법이 추가되어 다른 클래스를 사용하는 언어처럼 코딩할 수 있게 되었지만, 문법이 추가됨으로써 클래스를 흉내낼 뿐, 여전히 내부적으로 prototype을 사용한다. 내 생각이지만 js 개발자들의 많은 수요를 받아들여 클래스 문법이 추가되었다는 것은 prototype보다 class를 활용한 객체지향 코딩이 더 편하고 쉽다는 의미인 것 같기도 하다. 나 역시도 그렇게 느끼고..
 
 ## prototype을 언제 왜 쓸까?
-제가 이해한 바로는, 가장 큰 이유로 상속을 위해 prototype을 사용한다. 
+내가 이해한 바로는, 가장 큰 이유로 상속을 위해 prototype을 사용한다(사실은 상속보다는 위임에 가깝다). 
 클래스기반 언어를 예로 들었을 때,
 {% highlight java %}
   public class Person {
@@ -51,20 +51,20 @@ console.log(song.head, song.hasLaptop); // 1 true
 
 {% endhighlight %}
 
-lee.legs를 출력했더니 2가 출력되었다. 마치 Person클래스를 상속받은 것 처럼. prototype이 '원형', '기원' 이라는 뜻임을 보면, 상속이라는 개념과 어울릴 것 같은 느낌이 든다. 위의 코드를 이해하기 위해 조금 더 정리해보겠다.
+lee.legs를 출력했더니 마치 Person클래스를 상속받은 것 처럼 2가 출력되었다. prototype이 '원형', '기원' 이라는 뜻임을 보면, 상속이라는 개념과 어울릴 것 같은 느낌이 든다. 위의 코드를 이해하기 위해 조금 더 정리해보겠다.
 
-## 함수 선언시 일어나는 일 부터 봅시다
+## 함수 선언시 일어나는 일 부터 보자
 {% highlight javascript %}
 function Person() {}
 {% endhighlight %}
-이렇게 구현부에 내용이 없는 함수를 하나 선언하면 js내부적으로 어떤 일이 일어난다. 우선, 함수를 선언 했으니 함수가 생성이 되겠지? Person이라는 함수를 선언 했으니 Person이라는 함수가 메모리에 생성이 되고, 그와 동시에 Person Prototype Object라는 객체가 메모리에 생성이 된다. Person Prototype Object는 말 그대로 객체인데 이게 핵심! 우리가 위에서 
+이렇게 구현부에 내용이 없는 함수를 하나 선언하면 js내부적으로 어떤 일이 일어난다. 우선, 함수를 선언 했으니 함수가 생성이 될 것이다. Person이라는 함수를 선언 했으니 Person이라는 함수가 메모리에 생성이 되고, 그와 동시에 Person Prototype Object라는 객체가 메모리에 생성이 된다. Person Prototype Object는 말 그대로 객체인데 이게 핵심! 우리가 위에서 
 ```
 Person.prototype.head = 1;
 ```
 이렇게 head값을 주면 모두 Person Prototype Object의 속성으로 저장되고, Person 함수로부터 만들어진 모든 객체는 이 Person Prototype Object의 속성으로부터 head값을 받아온다. 즉, Person.prototype 으로 Person Prototype Object를 참조할 수 있다는 이야기. 정말 그런지 브라우저에서 실행한 화면을 보자.
 ![prototype1](/public/img/prototype/one.JPG)
 
-보는 것 처럼 Person함수를 선언하기만 했을 뿐인데 Person을 출력하면 이렇게 많은 내용이 출력된다. js 내부적으로 뭔가가 일어난 것. 내용을 보면 prototype이라는 속성이 있다. 이게 아까 말한 Person Prototype Object이다! 메모리 어딘가에 만들어진 이 Person Prototype Object객체를 참조하고 있는 것이다. 즉 Person Prototype Object 는 constructor와 __proto__라는 속성을 가지고 있는 셈이다. 일반 객체이기 때문에 속성을 마음대로 추가할수 있다. 위에서 본 코드
+보는 것 처럼 Person함수를 선언하기만 했을 뿐인데 Person을 출력하면 이렇게 많은 내용이 출력된다. js 내부적으로 뭔가가 일어난 것이다. 내용을 보면 prototype이라는 속성이 있다. 이게 아까 말한 Person Prototype Object이다! 메모리 어딘가에 만들어진 이 Person Prototype Object객체를 참조하고 있는 것이다. 즉 Person Prototype Object 는 constructor와 __proto__라는 속성을 가지고 있는 셈이다. 일반 객체이기 때문에 속성을 마음대로 추가할수 있다. 위에서 본 코드
 ```
 Person.prototype.head = 1;
 ```
@@ -74,9 +74,9 @@ Person.prototype.head = 1;
 Person.prototype, 즉 Person Prototype Object의 속성에 head값이 설정된 것이 보인다.
 
 ## Person Prototype Object의 __proto__는 뭘까?
-__proto__는 객체가 생성될 때 조상이었던 함수의 Prototype Object를 가리킨다. 즉, 어떤 객체이든 함수로 부터 생겨나기 때문에 모든 객체는 조상이 되는 함수가 존재할 수 밖에 없는데, 바로 그 함수의 Prototype Object를 가르키는 것이다. 코드를 보자.
+__proto__는 객체가 생성될 때 조상이었던 함수의 Prototype Object를 가리킨다. 즉, 어떤 객체이든 함수로 부터 생겨나기 때문에 모든 객체는 조상이 되는 함수가 존재할 수 밖에 없는데, 바로 그 함수의 Prototype Object를 가르키는 것이다.
 
-앞에서 첨부한 Person을 로그찍은 사진을 보시면 __proto__: Object 라고 되어있는 것을 볼 수 있다. __proto__는 객체가 생성될 때 자신의 조상었던 함수의 Prototype Object를 가리킨다고 했었다. 자바스크립트에서는 함수도 일급 객체다. 그럼 Person함수(사실은 일급 객체)가 생성 될 떄 조상이었던 함수의 Prototype Object가 __proto__라는 것인데, 우리가 Person함수를 만들 때 어떤 함수를 상속받지도, new 연산자를 사용하지도 않았는데 도대체 Person함수를 생성할 때 조상이었던 함수가 뭘까? 
+앞에서 첨부한 Person을 로그찍은 사진을 보시면 __ proto __: Object 라고 되어있는 것을 볼 수 있다. __proto__는 객체가 생성될 때 자신의 조상었던 함수의 Prototype Object를 가리킨다고 했었다. 자바스크립트에서는 함수도 일급 객체다. 그럼 Person함수(사실은 일급 객체)가 생성 될 떄 조상이었던 함수의 Prototype Object가 __proto__라는 것인데, 우리가 Person함수를 만들 때 어떤 함수를 상속받지도, new 연산자를 사용하지도 않았는데 도대체 Person함수를 생성할 때 조상이었던 함수가 뭘까? 
 
 바로 Object라는 함수이다. 이제막 js를 접하신 분들은 이상하게 들릴 수도 있지만, js의 모든 객체(함수 포함)는 함수로부터 만들어 지는데 자바스크립트에서 기본적으로 이 함수를 Object라는 이름의 함수로써 제공한다. Person함수(객체)의 조상도 Object함수인 것. 
 
@@ -109,7 +109,7 @@ const kim = new Programmer();
 console.log(kim.head);
 {% endhighlight %}
 
-바로 이 코드. 다시 한번 언급하지만 prototype은 메모리 어딘가에 저장된 Prototype Object을 가르킨다고 했었따. 따라서 간단하게 Programmer의 prototype을 Person으로 가르킨게 끝이다. 그럼 Programmer의 조상은 Person이다.
+바로 이 코드. 다시 한번 언급하지만 prototype은 메모리 어딘가에 저장된 Prototype Object을 가르킨다고 했었다. 따라서 간단하게 Programmer의 prototype을 Person으로 가르킨게 끝이다. 그럼 Programmer의 조상은 Person이다.
 
 코드 마지막줄의 kim에서 kim.head를 출력했하려고 하는데, kim자신에게는 head가 없다. 
 ``` 

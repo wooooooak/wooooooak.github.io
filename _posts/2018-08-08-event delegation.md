@@ -10,21 +10,8 @@ comments: true
 브라우저는 특정 element(div 등)에서 이벤트(click 등)가 발생했을 때, 그에 해당하는 이벤트를 자신의 부모 요소를 포함해 최상위 element인 document 요소까지 이벤트를 전파시킨다.
 
 간단한 코드를 보자면,
-```
-<body>
-  <div id="one">
-  one
-    <div id="two">
-     two
-     <div id="three">
-        three
-      </div>
-    </div>
-  </div>
-</body>
-```
 
-```
+```css
 // css
 #one{
   height: 300px;
@@ -41,9 +28,23 @@ comments: true
   width: 100px;
   background-color: blue;
 }
-````
+```
 
-{% highlight javascript %}
+```html
+<body>
+  <div id="one">
+  one
+    <div id="two">
+     two
+     <div id="three">
+        three
+      </div>
+    </div>
+  </div>
+</body>
+```
+
+```javascript
 var divThree = document.getElementById("three");
 var divTwo = document.getElementById("two");
 var divOne = document.getElementById("one");
@@ -55,7 +56,7 @@ divOne.addEventListener('click', printLog, {capture: true});
 function printLog(event) {
 	console.log(event.currentTarget.id);
 }
-{% endhighlight %}
+```
 
 이렇게 하면 결과물은 아래 이미지와 같다.
 ![event1](/public/img/event/event1.JPG)
@@ -79,7 +80,7 @@ one
 ## 이벤트 위임(delegation)
 버블링의 원리를 이용해서, 자식 요소가 많을 경우 자식 요소 하나하나에 이벤트를 붙이지 않고, **부모 요소에서 자식 요소의 이벤트들을 제어하는 방식**이다.
 
-```
+```html
 <body>
   <ul id="list">
    <li id="one">
@@ -94,7 +95,7 @@ one
   </ul>
 </body>
 ```
-{% highlight javascript %}
+```javascript
 var list = document.getElementById("list");
 
 
@@ -104,7 +105,7 @@ list.addEventListener('click', printLog);
 function printLog(event) {
  console.log(event.target.id);
 }
-{% endhighlight %}
+```
 
 ![event2](/public/img/event/event2.JPG)
 
@@ -119,7 +120,7 @@ li 요소를 클릭했을 때, bubbling으로 인해 부모의 click이벤트가
 이벤트 캡쳐는 이벤트 버블과 반대 방향으로 진행되며, 최상위 요소로부터 이벤트가 발생한 요소를 찾아가는 방식이다. 물론 찾아가는 과정에서 동일한 이벤트를 실행한다.
 
 사용하는 방법은 {capture: true} 옵션을 주는 것이다.
-{% highlight javascript %}
+```javascript
 var divThree = document.getElementById("three");
 var divTwo = document.getElementById("two");
 var divOne = document.getElementById("one");
@@ -131,7 +132,7 @@ divOne.addEventListener('click', printLog, {capture: true});
 function printLog(event) {
 	console.log(event.currentTarget.id);
 }
-{% endhighlight %}
+```
 
 동일하게 three를 클릭하면 bubbling때와 달리
 ```
@@ -140,7 +141,7 @@ two
 three
 ```
 가 출력된다. 만약 코드가 아래와 같다면?
-{% highlight javascript %}
+```javascript
 var divThree = document.getElementById("three");
 var divTwo = document.getElementById("two");
 var divOne = document.getElementById("one");
@@ -152,7 +153,7 @@ divOne.addEventListener('click', printLog, {capture: true});
 function printLog(event) {
 	console.log(event.currentTarget.id);
 }
-{% endhighlight %}
+```
 
 three를 클릭했을 때 결과는 
 ```
