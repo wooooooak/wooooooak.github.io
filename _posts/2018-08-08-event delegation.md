@@ -75,6 +75,14 @@ one
 ```
 일 것이고, 만약 two 요소의 이벤트가 click이 아니라 다른 이벤트가 등록이 되어있다면 그 것은 실행되지 않는다. 이런 원리로 인해 부모 요소에서 자식 요소의 이벤트를 감시할 수 있다. 그 것을 이용하는 것이 이벤트 위임(delegation)이다.
 
+### 참고 - 나는 그냥 three를 클릭하면 three만 출력되길 바란다. 즉 버블링을 없애고 싶다!
+이럴 경우에는 event객체의 stopPropagation() 메서드를 사용하면 된다.
+```javascript
+function printLog(event) {
+  event.stopPropagation();
+	console.log(event.currentTarget.id);
+}
+```
 
 
 ## 이벤트 위임(delegation)
