@@ -43,6 +43,7 @@ nav:
     - '/blog/'
     - { Categories: '/blog/categories/' }
     - { Tags: '/blog/tags/' }
+    - { Awesome Link: '/blog/awesomelink/' }
   About:          
     - '/about/'
   # Github Project: 
