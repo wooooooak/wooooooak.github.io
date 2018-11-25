@@ -25,7 +25,7 @@ version: 1.0.0
 # About/contact
 author:
   name: leeyongjun
-  description: 잘 적어놓고 실수는 한번만 합시다 :D
+  description: 세상에 공짜는 없다. 그러니 아낌 없이 배풀자 :D
   gravatar: 2306050fb6056c56f715299aac42215d # md5 hash of your email address
   contact:
     github:    https://github.com/wooooooak
