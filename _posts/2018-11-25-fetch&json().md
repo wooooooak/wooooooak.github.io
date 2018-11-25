@@ -1,8 +1,8 @@
 ---
 layout: post
 title: fetch사용시 유의 사항 (json() 함수 사용하기)
-category: javacript
-tags: [javacript, network, basic]
+category: javascript
+tags: [javascript, network, basic]
 comments: true
 ---
 

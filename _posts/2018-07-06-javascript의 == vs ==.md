@@ -1,8 +1,8 @@
 ---
 layout: post
 title: javascript 의 == vs ===
-category: javacript
-tags: [javacript, operation, basic]
+category: javascript
+tags: [javascript, operation, basic]
 comments: true
 ---
 

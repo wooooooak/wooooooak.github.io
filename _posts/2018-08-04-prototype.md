@@ -1,8 +1,8 @@
 ---
 layout: post
 title: javascript 프로토타입(prototype) 이해
-category: javacript
-tags: [javacript, basic]
+category: javascript
+tags: [javascript, basic]
 comments: true
 ---
 
