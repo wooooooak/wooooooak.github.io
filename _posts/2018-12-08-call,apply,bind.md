@@ -1,5 +1,5 @@
 ---
-layout: posty
+layout: post
 title: binding의 개념과 call, apply, bind의 차이점
 category: javascript
 tags: [javascript, basic, this, es6]
