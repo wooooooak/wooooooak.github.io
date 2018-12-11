@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "!"postfix (난 undefined가 아니에요)
+title: (!) postfix (난 undefined가 아니에요)
 category: typescript
 tags: [typescript, grammar]
 comments: true
