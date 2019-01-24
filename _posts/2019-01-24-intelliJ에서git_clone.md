@@ -1,7 +1,7 @@
 ---
 layout: post
 title: IntelliJ에서 git clone시 프로젝트 인식하기
-category: 개발 환경?
+category: 개발 환경
 tags: [intelliJ, java]
 comments: true
 ---
