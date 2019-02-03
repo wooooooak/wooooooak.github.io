@@ -57,7 +57,7 @@ HTML만 작성했을 경우 위의 사진처럼 화면 좌측 상단에 검은�
     align-items: center;
     justify-content: center;
 ```
-flex를 모른다면 [여기](https://flexboxfroggy.com/#ko)서 배우자. 게임형식으로 쉽게 배울 수 있다.
+flex를 모른다면 [이 링크](https://flexboxfroggy.com/#ko)에서 배우자. 게임형식으로 쉽게 배울 수 있다.
 
 
 ### box
