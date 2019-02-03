@@ -51,25 +51,25 @@ HTML, CSS 그리고 JAVASCRIPT로 Search Box 디자인을 해보자. 우리의 �
 
 `.center`를 구현하자.
 ```css
-    .center {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-    }
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
 ```
 `.center`도 역시 중앙에 위치해야 함으로 `position: absolute`로 지정해 주었다. 
 
 `input`을 구현하자.
 ```css
 input {
-	height: 1.8em;
-	width: 220px;
-	padding: 0 10px;
-    box-shadow: 3px 3px 10px #566270;
-    outline: none;
-	border: none;
-	color: #4F86C6;
+  height: 1.8em;
+  width: 220px;
+  padding: 0 10px;
+  box-shadow: 3px 3px 10px #566270;
+  outline: none;
+  border: none;
+  color: #4F86C6;
 }
 
 ::placeholder {
@@ -85,6 +85,7 @@ input의 `color`를 바꾸어줬는데, 여기서 color란 사용자가 입력�
 
 
 이제 `#recommend`를 구현하자. 사용자가 텍스트를 입력하면 `input`박스 밑에 나타날 영역이다.
+![searchBox5](/public/img/css_challenge/SearchBox5.PNG) 
 ```css
 #recommend {
 	margin-top: 1px;
