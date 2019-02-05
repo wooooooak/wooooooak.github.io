@@ -20,9 +20,7 @@
 .container {
 	max-width: 28rem;
 	a {
-		@if $theme-color != $default {
-			color: $theme-color;
-		}
+		color: $theme-color !important;
 	}
 }
 @media (min-width: 38em) {
