@@ -122,7 +122,7 @@ a.sidebar-nav-item:focus {
 .sidebar-toggle:before {
 	display: inline-block;
 	width: 1.1rem;
-	height: .25rem;
+	height: .85rem;
 	content: "";
 	@include background-image(linear-gradient(to bottom, $theme-color-dark, $theme-color-dark 20%, $white 20%, $white 40%, $theme-color-dark 40%, $theme-color-dark 60%, $white 60%, $white 80%, $theme-color-dark 80%, $theme-color-dark 100%));
 }
