@@ -7,10 +7,9 @@
  */
 
 .wrap {
-  position: relative;
-  width: 100%;
+	position: relative;
+	width: 100%;
 }
-
 
 /*
  * Container
@@ -19,22 +18,23 @@
  */
 
 .container {
-  max-width: 28rem;
-  a {
-    @if $theme-color != $default { color: $theme-color; }
-  }
+	max-width: 28rem;
+	a {
+		@if $theme-color != $default {
+			color: #4f86c6;
+		}
+	}
 }
 @media (min-width: 38em) {
-  .container {
-    max-width: 32rem;
-    &.content {
-      padding-top: 6.5rem;
-    }
-  }
+	.container {
+		max-width: 32rem;
+		&.content {
+			padding-top: 6.5rem;
+		}
+	}
 }
 @media (min-width: 56em) {
-  .container {
-    max-width: 38rem;
-  }
+	.container {
+		max-width: 38rem;
+	}
 }
-
