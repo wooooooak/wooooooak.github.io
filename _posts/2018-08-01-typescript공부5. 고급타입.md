@@ -49,7 +49,7 @@ let title2: string | undefined;
 
 플루언트 패턴을 구현할 때 this 타입 반환을 선언하고 자신을 가리키는 this를 반환한다.
 {% highlight typescript %}
-Class AddCalc {
+class AddCalc {
   public constructor(public value: number = 0) {}
   public add(operand: number): this {
     this.value += operand;
