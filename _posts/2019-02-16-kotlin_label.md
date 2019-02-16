@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 코틀린에서 람다 사용시 주의사항
+title: 람다식에서 return문 사용하기 (정확하게 알고 쓰자)
 category: Kotlin
 tags: [lambda, kotlin, scope]
 comments: true
