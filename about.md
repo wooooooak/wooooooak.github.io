@@ -11,14 +11,14 @@ title: About
 * React
 * Node.js
 * Typescript
-* Python
-* Algorithm
 * Frontend
-* Javascript Basic
 * UI UX
+* Kotlin
+* Android
+* Functional Programming
+
 
 * Reading
-* Movie
 * Football
 * Toy project
 
