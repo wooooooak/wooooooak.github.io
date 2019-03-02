@@ -75,9 +75,7 @@ fun exampleFunc4() {
 코드를 보면서 답답해 하셨던 분들이 계실거라 생각한다. 왜냐하면 위의 코드는 굳이 라벨링 필요 없이 아래와 같이 짜도 되기 때문이다.
 ```kotlin
 fun exampleFunc5() {
-    listOf(0,1,2,3).forEach {
-        if (it > 0) print(it)
-    }
+    println(listOf(1,2,3,4,5).filter { it > 5 })
 }
 ```
 예제는 예제일 뿐 방법은 다양하다.
