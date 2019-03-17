@@ -44,7 +44,7 @@ fun main() {
 
 쉽게 말해서 `runBlocking`은 { } 블록 안에 비동기 처리 코루틴들이 들어 있음에도 불구하고 마치 일반적인 하나의 함수처럼 작동하는 것이다. 즉, `runBlocking`블록안의 모든 비동기 작업이 끝나고,첫번째 줄에서 마지막 줄까지 모두 끝나야 그 다음 줄 코드가 실행된다. 코루틴이 아닌 일반 서브루틴(우리가 아는 기본적인 함수)처럼 말이다.
 
-## job.join() & defferd.async()
+## job.join() & defferd.await()
 ```kotlin
 fun main() { 
     runBlocking{ 
@@ -84,7 +84,7 @@ fun main() {
     println("end")            // #3
 }
 ```
-위처럼 하면 world -> Hello -> end 순서로 출력이된다. 즉 job의 join()함수를 만나게 되면, 그 순간 모든 job들을 확인한 후 job들이 아직 완료상태가 아니라 비동기 처리중인 상태일 경우 join()이후의 코드들을 실행시키지 않고 대기시킨다. 그리고 job들이 완료(미사일이 돌아옴)상태가 되면 그떄서야 join() 아랫줄 코드들을 실행시킨다.
+위처럼 하면 world -> Hello -> end 순서로 출력이된다. 즉 job의 `join()` 함수를 만나게 되면, 그 순간 모든 job들을 확인한 후 job들이 아직 완료상태가 아니라 비동기 처리중인 상태일 경우 `join()`이후의 코드들을 실행시키지 않고 대기시킨다. 그리고 job들이 완료(미사일이 돌아옴)상태가 되면 그때서야 join() 아랫줄 코드들을 실행시킨다.
 
 이제 비동기 요청으로 서버에 데이터를 요청했다고 가정하자. 서버에 데이터를 요청하고 받아오는 시간은 1초이고, 받아온 데이터를 가지고 어떤 연산을 하고싶다.
 위의 코드에서 job.join()아랫줄에 연산 코드를 넣으면 되겠지만, 서버로 부터 받아온 데이터가 어디있는가? 그것을 받아오도록 코드를 바꿔보자.
@@ -95,7 +95,7 @@ fun main() {
         var deffered = async { 
             delay(1000L) 
             println("world")  // #1
-            50
+            50 // 서버로 부터 받아온 데이터를 리턴해주는 부분 return은 적지 않는다.
         } 
         var dataFromServer = deffered.await()
         println(`Hello $dataFromServer`)      // #2 Hello 50
