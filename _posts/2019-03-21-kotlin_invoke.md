@@ -22,8 +22,8 @@ MyFunction.invoke("hello") // HELLO
 ```kotlin
 MyFunction("hello") // HELLO
 ```
-`MyFunction`은 객체다. 그렇기 때문에 `MyFunction`을 print해보면 `MyFunction`의 주소값만 출력될 뿐이다. 그런데 `MyFunction`안에 `invoke()`함수가 정의 되어있으므로 `MyFunction`에서 메서드의 이름 없이 바로 호출한 것이다. 물론 파라미터를 받을 창구가 있어야 하므로 ()안에 파라미터를 넣어서 실행이 가능하다.
-
+`MyFunction`은 객체다. 그렇기 때문에 `MyFunction`을 `print`해보면 `MyFunction`의 주소값만 출력될 뿐이다. 그런데 `MyFunction`안에 `invoke()`함수가 정의 되어있으므로 `MyFunction`에서 메서드 이름 없이 바로 호출한 것이다. 물론 파라미터를 받을 창구가 있어야 하므로 ()안에 파라미터를 넣어서 실행이 가능하다.
+### 연산자
 이렇듯 분명히 `invoke`와 같이 이름을 부여한 함수임에도 불구하고 실행을 간편하게 할 수 있게 하는 것들을 **연산자**라고 부른다. 그런 연산자들 몇 개를 코틀린에서 미리 정해놓았다. 대표적으로 + 연산자가 있다. 간단히 예제 하나를 보면서 연산자가 무엇인지 알고 다음으로 넘어가자.
 
 ```kotlin
