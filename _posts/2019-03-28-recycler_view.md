@@ -136,4 +136,4 @@ override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 첫 화면 이후 스크롤을 아래로 이동시키면 더 이상 `onCreateViewHolder`는 호출되지 않고 `onBind`로그만 찍히는 것을 알 수 있다. ViewHolder를 계속 만들지 않고 재사용하기 때문에 데이터만 새롭게 바인딩 해주는 것이다.
 
 ## 끄
-읕!
+읕! [다음에는 한개의 뷰가 아닌 여러개의 뷰 레이아웃이 필요한 상황에서 리사이클러 뷰를 다루는 방법](https://wooooooak.github.io/android/2019/04/13/RecyclerView_mutiType/)을 다뤄보자.
