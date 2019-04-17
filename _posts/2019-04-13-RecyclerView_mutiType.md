@@ -19,7 +19,7 @@ comments: true
 * 사진 오른쪽에 사진 제목과 컨텐츠 내용이 담긴 뷰 
 
 ## 사전 준비
-recyclerView와 cardView, material디자인을 설치할 것이다. 아래코드를 그냥 복사 붙여넣기해도 되지만, 시간이 지남에따라 버전업 되는 부분은 알아서 할수 있으리라 믿는다!
+recyclerView와 cardView, material디자인을 설치할 것이다. 아래코드를 그냥 복사 붙여넣기해도 되지만, 시간이 지남에따라 버전업 되는 부분은 알아서 할 수 있으리라 믿는다.
 ```gradle
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
