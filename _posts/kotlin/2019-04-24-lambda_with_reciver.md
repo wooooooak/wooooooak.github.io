@@ -30,3 +30,14 @@ comments: true
 ![with3](/public/img/kotlin/with4.png)
 
 with가 반환하는 값은 람다 코드를 실행한 결과며, 그 결과는 람다 식의 본문에 있는 마지막 식의 값이다. 그러나 때로는 람다의 결과 대신, 람다 함수 안에서 이리 저리 조작을 가한 수신 객체를 리턴 하고 싶은 경우가 있다. 그럴 때는 apply 함수를 사용할 수 있다.
+
+## aplly
+
+apply 함수는 with와 거의 같다. 단 한 가지 차이는, 자신에게 전달된 객체(수신 객체)를 반환한다는 점 뿐이다. apply가 어떻게 구현되어있는지 보자.
+![with3](/public/img/kotlin/apply1.png)
+
+apply가 확장 함수로 정의되어 있는 것을 알 수 있다. apply의 수신 객체가 전달받은 람다의 수신 객체가 되는 것이다.
+![with3](/public/img/kotlin/apply2.png)
+이 함수에서 apply를 실행한 결과는 StringBuilder 객체다. 따라서 그 객체의 toString을 호출해서 String 객체를 얻을 수 있다.
+
+이런 apply 함수는 객체의 인스턴스를 만들면서 즉시 프로퍼티 중 일부를 초기화해야 하는 경우 유용하다. 자바에서 별도의 Builder 객체가 하는 역할을 담당하는 것이다.
