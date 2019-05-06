@@ -40,7 +40,7 @@ AAC ViewModel에서 제대로 알아야겠다고 마음먹기 전에 이런 이�
 
 구글은 MVVM과 전혀 상관없는, 그저 이름만 ViewModel인 클래스를 제공했을 뿐 "MVVM의 ViewModel이니까 가져다 쓰세요~"라고 말한 적이 없다. 그냥 나처럼 멍청한 개발자들이 이름만 보고 헷갈려할 뿐....~~(솔직히 구글도 너무하긴 했다 이름이 viewModel이라니)~~
 
-##참고자료
+## 참고자료
 
 - [안드로이드 아키텍처 컴포넌트, ViewModel 이해하기](https://medium.com/@jungil.han/%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-viewmodel-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-2e4d136d28d2)
 - [구글 공식문서 - viewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
