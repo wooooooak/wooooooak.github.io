@@ -24,7 +24,7 @@ comments: true
 
 안드로이드 개발을 하면서 MVVM패턴을 사용하려고 한다면, 꼭 AAC의 ViewModel을 사용하지 않아도 MVVM구현은 가능하다. 선택은 개발자의 몫이다. 그러나 놓치지 말아야 할 것은, AAC의 뷰모델은 MVVM에서 말하는 ViewModel과 다르다는 것을 아는 것이다. 이걸 모르고 AAC ViewModel을 mvvm ViewModel처럼 사용한다면 개발 도중 어려움이 생길 가능성이 크다. 한 가지 예를 들자면, **AAC ViewModel은 ViewModelProviders를 사용해서 ViewModel을 만드는데, 이렇게 만들어진 뷰모델은 그 액티비티에서 딱 하나만 존재하게 된다. 액티비티 한 개 내에서만 유효한 싱글톤인 셈이다.** 이런 특성은 일반적인 MVVM에서는 강제되는 것이 아니기 때문에 혼란이 올 수 있다.
 
-바로 위에서 "뷰모델은 그 액티비티에서 딱 하나만 존재하게 된다"라고 설명했는데 오해의 소지가 있을수 있을 것 같아서 추가적으로 언급하자면, 이 말이 **뷰 한개에 뷰모델 유형이 딱 한개 존재해야 한다는 것은 아니다.** 예를 들어 SignUpActivity 뷰가 있다고 했을 때, 그에 대응하는 SignUpViewModel 딱 하나만이 존재해야 한다는 것은 아니다. MVVM패턴에서는 뷰와 뷰모델은 1:n 관계이기 때문이다. 개발자는 필요에 따라서 얼마든지 UserPersonalDataViewModel, UserAccountViewModel 등등 여러가지 뷰모델로 나눠서 사용이 가능하다. 다만 UserPersonalDataViewModel을 한번 생성하면, 그 액티비티에서 UserPersonalDataViewModel을 여러번 생성해도 그것은 싱글톤이기 때문에 하나의 객체만 계속 사용된다는 것이다.
+바로 위에서 "뷰모델은 그 액티비티에서 딱 하나만 존재하게 된다"라고 설명했는데 오해의 소지가 있을수 있을 것 같아서 추가적으로 언급하자면, 이 말이 **뷰 한개에 뷰모델 유형이 딱 한개 존재해야 한다는 것은 아니다.** 예를 들어 SignUpActivity 뷰가 있다고 했을 때, 그에 대응하는 SignUpViewModel 딱 하나만이 존재해야 한다는 것은 아니다. MVVM패턴에서는 뷰와 뷰모델은 1:n 관계이기 때문이다. 개발자는 필요에 따라서 얼마든지 UserPersonalDataViewModel, UserAccountViewModel 등등 여러가지 뷰모델로 나눠서 사용이 가능하다. 다만 UserPersonalDataViewModel을 한번 생성하면, 그 액티비티에서 UserPersonalDataViewModel을 여러번 생성해도 그것은 싱글톤이기 때문에 하나의 객체만 계속 사용된다는 것이다. 그리고 한 가지더, 구글은 하나의 뷰에 하나의 뷰모델만 두고 사용하는 것을 권장한다. SignUpActivity가 있다면, SignUpViewModel 하나만 놔두고, 그 안에 여러 Model과 LiveData를 사용하는 것을 권장하고 있다. 이것은 원래의 MVVM 원칙과 맞지 않는 내용이다. 더 좋고 더 나쁜 방식은 없다. 구글이 추천하는 방식과 원래 MVVM의 원칙 중 어떤것이 더 자신의 프로젝트에 맞는지는 개발자가 판단할 몫이다.
 
 ## 결론
 
