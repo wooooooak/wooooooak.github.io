@@ -75,3 +75,66 @@ return doWorkWith(x).takeIf { x.isValid() }
 #### 차이점 2 : 초과 연산
 
 `if/else`절에서는 x가 유효하지 않을 경우 따로 연산을 하지 않는다. else절에 가지 않기 때문이다. 반면 `takeIf()`를 사용할 경우 코드는 항상 `doWorkWith(x)`를 호출하게 된다. 이것은 predicate가 false일 때 초자 불필요하게 연산을 한다. predicate가 어떤 에러없이 안전하게 호출되는 것은 좋지만, 굳이 필요하지 않을 때도 연산을 하는 것이다.
+
+#### 차이점 3 : 부수 효과
+
+초과 연산의 연장선으로 볼 수 있다. 원하던 원하지 않던 predicate가 실행되기 때문에 부수효과가 일어날 수 있는 것이다. 나는 함수형 프로그래밍 애찬론자는 아니기에 부수효과에 대해 왈가왈부하진 않겠다.
+그러나 predicate가 로그를 찍는다고 생각해보자. predicate 함수로 인해 데이터를 생성하고, 원하지 않는 작업들이 수행될 수도 있다.
+
+## `takeIf()`와 `takeUnless()`가 약이 되는 경우
+
+바로 위에서 `takeIf()`와 `takeUnless()`가 독이 되는 경우를 보았다. 이제는 약이 되는 경우, 즉 사용하기에 적합한 경우를 살펴보자.
+
+#### 예시 1 : 객체가 식이 아닐 때
+
+`takeIf()`를 호출하는 것이 그저 값(객체)일 때 위에서 말한 3가지 문제를 피할 수 있다. 식에 대해서 `takeIf()`를 호출한 다면 에러를 유발하기 쉽다.
+
+#### 예시 2 : predicate가 좀 복잡해서 읽기 힘들 때
+
+간단한 예시를 보자. 아래의 함수를 더 좋게 바꿀 수 있다.
+
+```kotlin
+return if (x) y else null
+```
+
+이렇게 바꾸자
+
+```kotlin
+return y.takeIf { x }
+```
+
+이렇게 바꾸는 것이 더 읽기 쉽다는 것은 전적으로 내 주관이다. 나는 개인적으로 predicate가 복잡하면 복잡할수록 `takeIf()`와 `takeUnless()`가 더 빛을 본다고 생각한다.
+
+아래의 코드를
+
+```kotlin
+return if (evensOnly && x % 2 == 0) x else null
+```
+
+아래처럼 바꿔보자
+
+```kotlin
+return x.takeIf { evensOnly && x % 2 == 0}
+```
+
+다시 말하지만 개인 취향이고 내 생각이다. 나는 `takeIf()`가 더 읽기 쉽다고 생각한다.
+
+#### 예시 3 : 어떤 함수가 특정 객체의 조건부로 호출될 때
+
+`if`문에서 많은 일을 한다고 가정해보자.
+
+```kotlin
+return if (someString.isNotBlank()) {
+    someMoreWork(someString)
+} else {
+    null
+}
+```
+
+위의 코드는 아래처럼 바뀔 수 있다.
+
+```kotlin
+return someString.takeIf { it.isNotBlank() }?.let { someMoreWork(it) }
+```
+
+다시 말하지만, `takeIf`가 더 읽기 쉽다는 것은 주관적인 생각이다.
