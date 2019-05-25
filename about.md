@@ -8,15 +8,15 @@ title: About
 </p>
 
 저의 주요 관심사이자 공부중인 항목들입니다.
-* React
-* Node.js
-* Typescript
-* Frontend
-* UI UX
-* Kotlin
-* Android
-* Functional Programming
 
+- Kotlin
+- Android
+- Functional Programming
+- React
+- Node.js
+- Typescript
+- Frontend
+- UI UX
 
 * Reading
 * Football
