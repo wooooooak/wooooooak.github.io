@@ -13,7 +13,7 @@ comments: true
 ```kotlin
 class ViewModel: ViewModel() {
     fun fetchDocs() {
-        get("dev.android.com) { result ->
+        get("dev.android.com") { result ->
             show(result)
         }
     }
