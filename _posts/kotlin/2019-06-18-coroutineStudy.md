@@ -11,7 +11,7 @@ comments: true
 코루틴으로 메인쓰레드를 너무 오래 블락시키는 Long running task문제를 해결 할 수 있다. 안드로이드 플랫폼은 메인쓰레드에서 5초 이상 걸리는 긴 작업을 할 경우 앱을 죽여버린다. 그래서 network나 db접근같이 오래걸리는 작업은 모두 다른 스레드에서 작업하고, 그 결과를 받아 ui를 그려주는 것은 다시 Main 스레드로 돌아와서 작업해야한다. 기존에는 이런 작업을 콜백으로 처리했다.
 
 ```kotlin
-class ViewModel: ViewModel() {
+class MyViewModel: ViewModel() {
     fun fetchDocs() {
         get("dev.android.com") { result ->
             show(result)
@@ -41,13 +41,13 @@ fun main() {
 // World!
 ```
 
-delay는 suspend함수다. suspend란 잠시 중단한다는 의미이고, 잠시 중단한다면 언젠가는 다시 resume된다는 뜻이다. 위 코드에서는 delay라는 suspend가 끝이나면 그때 caller가 resume시켜 아랫줄 코드를 실행시킨다.
+`delay`는 suspend함수다. suspend란 잠시 중단한다는 의미이고, 잠시 중단한다면 언젠가는 다시 resume된다는 뜻이다. 위 코드에서는 delay라는 suspend가 끝이나면 그때 caller가 resume시켜 아랫줄 코드를 실행시킨다.
 
 delay라는 함수는 현재 실행중인 thread를 block시키진 않지만 코루틴은 일시 중지시킨다. thread입장에서는 non-blocking이다.
 
 문서에서 **blocking**과 **non-blocking**이 자주 나오는데, 이것은 쓰레드 입장에서 봐야한다. 우선은 쓰레드를 멈춘다면 blocking이고, 쓰레드를 멈추지 않는다면 non-blocking이라고 이해하자.
 
-위 코드에서 GlobalScope라는 것이 보인다. launch라는 코루틴 빌더는 늘 어떤 코루틴 스코프안에서 코루틴을 launch한다. 위에서는 새로운 코루틴을 GlobalScope에서 launch하도록 했다. 이 말은 Global이 의미하는 것 처럼, 새롭게 launch된 코루틴은 해당 어플리케이션 전체의 생명주기에 적용된다는 말이다.
+위 코드에서 `GlobalScope`라는 것이 보인다. `launch`라는 코루틴 빌더는 늘 어떤 코루틴 스코프안에서 코루틴을 `launch`한다. 위에서는 새로운 코루틴을 `GlobalScope`에서 `launch`하도록 했다. 이 말은 Global이 의미하는 것 처럼, 새롭게 `launch`된 코루틴은 해당 어플리케이션 전체의 생명주기에 적용된다는 말이다.
 
 ### runBlocking
 
@@ -72,9 +72,9 @@ fun main() {
 
 [](https://www.notion.so/c119dc2524f140dda4e1ac10180bece6#af930233b4a94a388201c296d05f863e)
 
-언제까지 블로킹 시킬까? runBlocking 블록 안에 있는 코드가 모두 실행을 끝마칠 때 까지 블록된다. runBlocking { ... } 안에 2초의 delay를 주었으므로 2초동안 메인쓰레드가 블록된다. 2초의 딜레이가 끝나면 main()함수는 종료된다. 메인쓰레드가 블록되어있는 2초 동안에, 이전에 launch했던 코루틴은 계속해서 동작하고있다.
+언제까지 블로킹 시킬까? runBlocking 블록 안에 있는 코드가 모두 실행을 끝마칠 때 까지 블록된다. `runBlocking { ... }` 안에 2초의 delay를 주었으므로 2초동안 메인쓰레드가 블록된다. 2초의 딜레이가 끝나면 main()함수는 종료된다. 메인쓰레드가 블록되어있는 2초 동안에, 이전에 launch했던 코루틴은 계속해서 동작하고있다.
 
-한편 delay는 suspend 함수이기 때문에 코루틴이 아닌 일반 쓰레드에서는 사용이 불가능한데, runBlocking {...} 블락 안에 delay()가 사용가능한 것으로 보아 runBlocking 역시 새로운 코루틴을 생성하는 것으로 보인다. 동시에 자신이 속한 쓰레드를 블로킹 시키기도 한다.
+한편 delay는 suspend 함수이기 때문에 코루틴이 아닌 일반 쓰레드에서는 사용이 불가능한데, `runBlocking {...}` 블락 안에 `delay()`가 사용가능한 것으로 보아 `runBlocking` 역시 새로운 코루틴을 생성하는 것으로 보인다. 동시에 자신이 속한 쓰레드를 블로킹 시키기도 한다.
 
 위 코드를 한 번 더 진화시켜보자.
 
@@ -91,7 +91,7 @@ fun main() = runBlocking<Unit> { // start main coroutine
 }
 ```
 
-runBlocking을 메인스레드 전체에 걸어줌으로써 시작부터 메인 쓰레드를 블락시키고 top-level 코루틴을 시작한다. 위에서 설명했듯이 runBlocking은 runBlocking {...} 블록 안에있는 모든 코루틴들이 완료될때 까지 자신이 속한 스레드를 종료시키지 않고 블락시킨다. 따라서 runBlocking에서 가장 오래 걸리는 작업인 delay(2초)가 끝날 때 까지 메인쓰레드는 죽지 않고 살아있다.
+runBlocking을 메인스레드 전체에 걸어줌으로써 시작부터 메인 쓰레드를 블락시키고 top-level 코루틴을 시작한다. 위에서 설명했듯이 runBlocking은 `runBlocking {...}` 블록 안에있는 모든 코루틴들이 완료될때 까지 자신이 속한 스레드를 종료시키지 않고 블락시킨다. 따라서 runBlocking에서 가장 오래 걸리는 작업인 delay(2초)가 끝날 때 까지 메인쓰레드는 죽지 않고 살아있다.
 
 그런데 1초의 시간뒤에 "World!"라는 단어를 찍기위하여 2초를 기다리는 일은 별로 좋아보이지 않는다. 예를들어 1초의 시간이 어떠한 디비를 접속해서 데이터를 가져오는 비동기 처리 작업이라고 한다면, 그때 걸리는 시간이 무조건 1초가 걸린다고 가정할 수는 없으므로 2초라는 구체적인 시간동안 스레드를 죽이지 않는 건 좋지 못하다. 디비를 갔다가 오는 시간이 3초가 걸릴수도 있지 않은가. 따라서 우리는 데이터베이스를 갔다가 어떤 응답을 가져오면, 그 즉시 어떤 일을 처리하고 프로그램을 종료시킬 방법이 필요하다. Job을 통해 그런 일이 가능하다.
 
@@ -110,9 +110,9 @@ fun main() = runBlocking {
 }
 ```
 
-위의 코드에는 1초의 딜레이 이후 "World!"가 찍히는 것을 보기위해 2초동안 프로그램을 종료시키지 않는 delay(2000L)라는 코드가 없다. 위 코드는 GlobalScope.launch로 생성한 코루틴이 제 기능을 다 완수하는 즉시 프로그램을 종료시킨다. job이라는 변수가 특정 코루틴의 레퍼런스를 가지고 있고, job.join()이 job이 끝나기를 계속 기다리기 때문이다. job이 끝나지 않으면 runBlocking()으로 생성한 코루틴은 끝나지 않는다.
+위의 코드에는 1초의 딜레이 이후 "World!"가 찍히는 것을 보기위해 2초동안 프로그램을 종료시키지 않는 `delay(2000L)`라는 코드가 없다. 위 코드는 `GlobalScope.launch`로 생성한 코루틴이 제 기능을 다 완수하는 즉시 프로그램을 종료시킨다. job이라는 변수가 특정 코루틴의 레퍼런스를 가지고 있고, job.join()이 job이 끝나기를 계속 기다리기 때문이다. job이 끝나지 않으면 `runBlocking()`으로 생성한 코루틴은 끝나지 않는다.
 
-모든 코루틴 빌더(runBlocking {}, launch {} 등등)는 빌더로 인해 생성되는 코드 블록 안에다가 CoroutineScope 객체를 추가한다. 위 코드에서는 runBlocking의 블록 안에서 GlobalScope로 코루틴을 만들어 launch했지만, GlobalScope를 사용하지 않고 runBlocking 이 만든 코루틴 스코프와 같은 스코프로 코루틴을 만들 수 있다(그냥 launch { }를 호출하면 바로 바깥의 스코프와 동일한 스코프에 생긴다). 게다가 바깥에 있는 코루틴은 안쪽에 있는 코루틴이 끝날때 까지 끝나지 않는다는 성질을 이용해서 코드를 더 깔끔하게 만들 수 있다.
+모든 코루틴 빌더(`runBlocking {}`, `launch {}` 등등)는 빌더로 인해 생성되는 코드 블록 안에다가 CoroutineScope 객체를 추가한다. 위 코드에서는 runBlocking의 블록 안에서 GlobalScope로 코루틴을 만들어 launch했지만, GlobalScope를 사용하지 않고 runBlocking 이 만든 코루틴 스코프와 같은 스코프로 코루틴을 만들 수 있다(그냥 `launch { }`를 호출하면 바로 바깥의 스코프와 동일한 스코프에 생긴다). 게다가 바깥에 있는 코루틴은 안쪽에 있는 코루틴이 끝날때 까지 끝나지 않는다는 성질을 이용해서 코드를 더 깔끔하게 만들 수 있다.
 
 ```kotlin
 import kotlinx.coroutines.*
