@@ -136,9 +136,9 @@ fun main() = runBlocking { // this: CoroutineScope
 suspend와 resume은 콜백을 대체하기 위해 같이 쓰인다.
 
 ```kotlin
-class ViewModel: ViewModel() {
+class MyViewModel: ViewModel() {
     fun fetchDocs() {
-        get("dev.android.com) { result ->
+        get("dev.android.com") { result ->
             show(result)
         }
     }
