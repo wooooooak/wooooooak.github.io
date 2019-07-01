@@ -18,7 +18,7 @@ support 라이브러리는 표준 프레임워크 API에서 사용할 수 없었
 
 자세한 내용은 [공식 문서](https://developer.android.com/topic/libraries/support-library/features?hl=ko)를 참고하자.
 
-## minSdk는 14로!
+## minSdk는 14 이상으로
 
 원래는 support-v4와 support-v7과 같이 _v# 표기법_ 으로 지원하는 최소 API 레벨을 나타냈다고 한다. v4는 API Level 4 이상 기기부터 지원하고, v7는 API Level 7 이상 기기부터 서포트 패키지를 지원했다고 한다. 그러나 support libarary 26.0.0(2017년 7월 버전)부터 지원되는 모든 API 레벨이 최소 Android 4.0(API레벨 14)로 변경되었다. 따라서 현재는 v#에 적혀있는 버전이 큰 의미가 없으며 v4 와 v7라이브러리 패키지는 동일한 최소 API 수준(API Level 14)을 지원한다.
 
