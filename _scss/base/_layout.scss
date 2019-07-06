@@ -7,8 +7,8 @@
  */
 
 .wrap {
-	position: relative;
-	width: 100%;
+  position: relative;
+  width: 100%;
 }
 
 /*
@@ -18,21 +18,21 @@
  */
 
 .container {
-	max-width: 28rem;
-	a {
-		color: $theme-color !important;
-	}
+  max-width: 28rem;
+  a {
+    color: #17e5bc !important;
+  }
 }
 @media (min-width: 38em) {
-	.container {
-		max-width: 32rem;
-		&.content {
-			padding-top: 6.5rem;
-		}
-	}
+  .container {
+    max-width: 32rem;
+    &.content {
+      padding-top: 6.5rem;
+    }
+  }
 }
 @media (min-width: 56em) {
-	.container {
-		max-width: 38rem;
-	}
+  .container {
+    max-width: 38rem;
+  }
 }
