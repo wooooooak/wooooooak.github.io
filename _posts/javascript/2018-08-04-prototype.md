@@ -90,7 +90,7 @@ Person.prototype.head = 1;
 
 `__proto__`는 객체가 생성될 때 조상이었던 함수의 `Prototype Object`를 가리킨다. 즉, 어떤 객체이든 함수로 부터 생겨나기 때문에 모든 객체는 조상이 되는 함수가 존재할 수 밖에 없는데, 바로 그 함수의 `Prototype Object`를 가르키는 것이다.
 
-앞에서 첨부한 Person을 로그찍은 사진을 보시면 ****proto****: Object 라고 되어있는 것을 볼 수 있다. **proto**는 객체가 생성될 때 자신의 조상었던 함수의 Prototype Object를 가리킨다고 했었다. 자바스크립트에서는 함수도 일급 객체다. 그럼 `Person`함수(사실은 일급 객체)가 생성 될 떄 조상이었던 함수의 Prototype Object가 **proto**라는 것인데, 우리가 `Person`함수를 만들 때 어떤 함수를 상속받지도, new 연산자를 사용하지도 않았는데 도대체 `Person`함수를 생성할 때 조상이었던 함수가 뭘까?
+앞에서 첨부한 Person을 로그찍은 사진을 보시면 \***\*proto\*\***: Object 라고 되어있는 것을 볼 수 있다. **proto**는 객체가 생성될 때 자신의 조상었던 함수의 Prototype Object를 가리킨다고 했었다. 자바스크립트에서는 함수도 일급 객체다. 그럼 `Person`함수(사실은 일급 객체)가 생성 될 떄 조상이었던 함수의 Prototype Object가 **proto**라는 것인데, 우리가 `Person`함수를 만들 때 어떤 함수를 상속받지도, new 연산자를 사용하지도 않았는데 도대체 `Person`함수를 생성할 때 조상이었던 함수가 뭘까?
 
 바로 Object라는 함수이다. 이제막 js를 접하신 분들은 이상하게 들릴 수도 있지만, js의 모든 객체(함수 포함)는 함수로부터 만들어 지는데 자바스크립트에서 기본적으로 이 함수를 Object라는 이름의 함수로써 제공한다. Person함수(객체)의 조상도 Object함수인 것.
 
@@ -128,7 +128,7 @@ const kim = new Programmer();
 console.log(kim.head);
 {% endhighlight %}
 
-바로 이 코드. 다시 한번 언급하지만 prototype은 메모리 어딘가에 저장된 Prototype Object을 가르킨다고 했었다. 따라서 간단하게 Programmer의 prototype을 Person으로 가르킨게 끝이다. 그럼 Programmer의 조상은 Person이다.
+바로 이 코드. 다시 한번 언급하지만 prototype은 메모리 어딘가에 저장된 Prototype Object을 가리킨다고 했었다. 따라서 간단하게 Programmer의 prototype을 Person으로 가리킨게 끝이다. 그럼 Programmer의 조상은 Person이다.
 
 코드 마지막줄의 kim에서 kim.head를 출력했하려고 하는데, kim자신에게는 head가 없다.
 
