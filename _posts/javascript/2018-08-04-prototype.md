@@ -29,7 +29,7 @@ comments: true
 이런 클래스가 있다고 치자. 사람이라면 머리가 하나이고 다리가 두 개이니 Person이라는 클래스로 적어놓았다. 그리고 Programmer라는 클래스를 만들어 Person을 상속받아 보겠다.
 
 ```java
-  public class Programmer extend Person {
+  public class Programmer extends Person {
     boolean hasLaptop;
   }
 ```
@@ -86,11 +86,11 @@ Person.prototype.head = 1;
 
 `Person.prototype`, 즉 `Person Prototype Object` 속성에 `head`값이 설정된 것이 보인다.
 
-## Person Prototype Object의 **proto**는 뭘까?
+## Person Prototype Object의 `_proto__`는 뭘까?
 
 `__proto__`는 객체가 생성될 때 조상이었던 함수의 `Prototype Object`를 가리킨다. 즉, 어떤 객체이든 함수로 부터 생겨나기 때문에 모든 객체는 조상이 되는 함수가 존재할 수 밖에 없는데, 바로 그 함수의 `Prototype Object`를 가르키는 것이다.
 
-앞에서 첨부한 Person을 로그찍은 사진을 보시면 \***\*proto\*\***: Object 라고 되어있는 것을 볼 수 있다. **proto**는 객체가 생성될 때 자신의 조상었던 함수의 Prototype Object를 가리킨다고 했었다. 자바스크립트에서는 함수도 일급 객체다. 그럼 `Person`함수(사실은 일급 객체)가 생성 될 떄 조상이었던 함수의 Prototype Object가 **proto**라는 것인데, 우리가 `Person`함수를 만들 때 어떤 함수를 상속받지도, new 연산자를 사용하지도 않았는데 도대체 `Person`함수를 생성할 때 조상이었던 함수가 뭘까?
+앞에서 첨부한 Person을 로그찍은 사진을 보면 `__proto__: Object` 라고 되어있는 것을 볼 수 있다. `proto**는 객체가 생성될 때 자신의 조상었던 함수의 Prototype Object를 가리킨다고 했었다. 자바스크립트에서는 함수도 일급 객체다. 그럼`Person`함수(사실은 일급 객체)가 생성 될 때 조상이었던 함수의 Prototype Object가 **proto**라는 것인데, 우리가`Person`함수를 만들 때 어떤 함수를 상속받지도, new 연산자를 사용하지도 않았는데 도대체`Person`함수를 생성할 때 조상이었던 함수가 뭘까?
 
 바로 Object라는 함수이다. 이제막 js를 접하신 분들은 이상하게 들릴 수도 있지만, js의 모든 객체(함수 포함)는 함수로부터 만들어 지는데 자바스크립트에서 기본적으로 이 함수를 Object라는 이름의 함수로써 제공한다. Person함수(객체)의 조상도 Object함수인 것.
 
@@ -100,13 +100,13 @@ Person.prototype.head = 1;
 
 아까 분명히
 
-```
+```javascript
 Person.prototype.head = 1;
 ```
 
-이 코드를 수행했음에도 불구하고 song 객체를 만들어 로그를 찍어보면 **proto**속성 밖에 없다. 그러나 문제 될 것이 없다! song 객체는 Person함수로 부터 만들어 졌으므로 song의 **proto**는 Person Prototype Object를 가르키고, 이 Person Prototype Object 안에 모든게 들어있으니까
+이 코드를 수행했음에도 불구하고 song 객체를 만들어 로그를 찍어보면 `__proto__`속성 밖에 없다. 그러나 문제 될 것이 없다! song 객체는 `Person` 함수로부터 만들어 졌으므로 `song`의 `__proto__`는 Person Prototype Object를 가르키고, 이 Person Prototype Object 안에 모든게 들어있으니까.
 
-```
+```javascript
 console.log(song.head);
 ```
 
@@ -128,20 +128,20 @@ const kim = new Programmer();
 console.log(kim.head);
 {% endhighlight %}
 
-바로 이 코드. 다시 한번 언급하지만 prototype은 메모리 어딘가에 저장된 Prototype Object을 가리킨다고 했었다. 따라서 간단하게 Programmer의 prototype을 Person으로 가리킨게 끝이다. 그럼 Programmer의 조상은 Person이다.
+바로 이 코드. 다시 한번 언급하지만 `prototype`은 메모리 어딘가에 저장된 Prototype Object을 가리킨다고 했었다. 따라서 간단하게 Programmer의 prototype을 Person으로 가리킨게 끝이다. 그럼 Programmer의 조상은 Person이다.
 
-코드 마지막줄의 kim에서 kim.head를 출력했하려고 하는데, kim자신에게는 head가 없다.
+코드 마지막줄의 `kim`에서 `kim.head`를 출력했하려고 하는데, `kim`자신에게는 head가 없다.
 
-```
+```javascript
 kim.head = 1;
 ```
 
-이렇게 해준 적이 없으니까. 그래서 Programmer의 prototype Object를 뒤져보는데 또 head가 없다, 그럼 또 그 조상인 Person Prototype Object를 뒤져서 head를 찾아낸다. 이게 바로 prototyhpoe chain이다!
+이렇게 해준 적이 없으니까. 그래서 Programmer의 prototype Object를 뒤져보는데 또 `head`가 없다, 그럼 또 그 조상인 Person Prototype Object를 뒤져서 `head`를 찾아낸다. 이게 바로 prototyhpoe chain이다!
 
 ## 정리
 
-개인적으로 prototype과 **proto**가 언제 어디서 쓰이는지가 자꾸 헷갈렸다.
-정리하자면 prototype을 사용할 수 있는곳은 함수뿐이다. 함수만이 prototype속성을 사용할 수 있다.
+개인적으로 `prototype`과 `__proto__`가 언제 어디서 쓰이는지가 자꾸 헷갈렸다.
+정리하자면 `prototype`을 사용할 수 있는곳은 함수뿐이다. 함수만이 prototype속성을 사용할 수 있다.
 
 {% highlight javascript %}
 Person.prototype; // {head: 1, constructor: 함수, **proto**: 객체}
@@ -149,7 +149,7 @@ Person.prototype; // {head: 1, constructor: 함수, **proto**: 객체}
 kim.prototype; // undefined
 {% endhighlight %}
 
-반면 **proto**는 js의 모든 객체에서 사용된다. 모든 객체는 자신을 만든 조상 객체를 참조할 필요가 있으니까. 함수도 객체이니 함수에서도 사용된다. 함수도 무언가로부터 생성된 객체라는 점을 잊지 말자.
+반면 `__proto__`는 js의 모든 객체에서 사용된다. 모든 객체는 자신을 만든 조상 객체를 참조할 필요가 있으니까. 함수도 객체이니 함수에서도 사용된다. 함수도 무언가로부터 생성된 객체라는 점을 잊지 말자.
 
 ### 더 좋은 자료
 
