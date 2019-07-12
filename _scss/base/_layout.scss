@@ -20,7 +20,7 @@
 .container {
   max-width: 28rem;
   a {
-    color: #17e5bc !important;
+    color: $theme-color !important;
   }
 }
 @media (min-width: 38em) {
