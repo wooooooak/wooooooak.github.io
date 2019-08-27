@@ -6,6 +6,8 @@ tags: [coroutine, study]
 comments: true
 ---
 
+코루틴이 완전히 처음이라면 [코틀린 코루틴 개념익히기](https://wooooooak.github.io/kotlin/2019/08/25/%EC%BD%94%ED%8B%80%EB%A6%B0-%EC%BD%94%EB%A3%A8%ED%8B%B4-%EA%B0%9C%EB%85%90-%EC%9D%B5%ED%9E%88%EA%B8%B0/) 추천!
+
 코루틴은 우리가 흔히 알고 있는 함수의 상위 개념이라고 볼 수 있다. 일반 함수의 경우 caller가 함수를 호출하면 호출당한 함수는 caller에게 어떤 값을 return하고 끝이난다. 그러나 코루틴은 suspend/resume도 가능하다. 즉, caller가 함수를 call하고, 함수가 caller에게 값을 return하면서 종료하는 것 뿐만 아니라 값을 return하지 않고 잠시 멈추었다가 필요할 때에 다시 이어서 resume(재개)할 수도 있다.
 
 코루틴으로 메인쓰레드를 너무 오래 블락시키는 Long running task문제를 해결 할 수 있다. 안드로이드 플랫폼은 메인쓰레드에서 5초 이상 걸리는 긴 작업을 할 경우 앱을 죽여버린다. 그래서 network나 db접근같이 오래걸리는 작업은 모두 다른 스레드에서 작업하고, 그 결과를 받아 ui를 그려주는 것은 다시 Main 스레드로 돌아와서 작업해야한다. 기존에는 이런 작업을 콜백으로 처리했다.
