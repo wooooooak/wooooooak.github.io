@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Android Rotate ImageView 90 degree whenever you touch 2 (이미지 클릭마다 에니메이션과 함께 90도씩 회전시키기)
-category: Kotlin
+category: Android
 tags: [rotate, imageView]
 comments: true
 ---
