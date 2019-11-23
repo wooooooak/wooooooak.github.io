@@ -6,7 +6,7 @@ tags: [DialogFragment]
 comments: true
 ---
 
-### 마음대로 되지 않는 DialogFragment
+### 마음처럼 되지 않는 DialogFragment
 
 액티비티나 프레그먼트 위에서 DialogFragment를 띄우다 보면 DialgFragment의 전체 크기 조절이 마음처럼 되지 않는다.
 
