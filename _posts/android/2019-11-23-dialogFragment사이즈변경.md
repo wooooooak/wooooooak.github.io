@@ -6,7 +6,7 @@ tags: [DialogFragment]
 comments: true
 ---
 
-### 마음처럼 되지 않는 DialogFragment
+## 마음처럼 되지 않는 DialogFragment
 
 액티비티나 프레그먼트 위에서 DialogFragment를 띄우다 보면 DialgFragment의 전체 크기 조절이 마음처럼 되지 않는다.
 
@@ -28,7 +28,7 @@ comments: true
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-### 컨텐츠와 무관하게 이상적인 여백을 가지는 방법
+## 컨텐츠와 무관하게 이상적인 여백을 가지는 방법
 
 ### 1. 지정해둔 dp 크기로 setLayout 하는 방법
 
