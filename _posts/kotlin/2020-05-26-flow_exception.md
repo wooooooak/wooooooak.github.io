@@ -83,7 +83,9 @@ Caught java.lang.IllegalStateException: Crashed on 2
 
 emit 하는 쪽에서 exception을 캡슐화 하고 싶으면 어떻게 할까요? 즉 collector 측에서는 예외처리를 하지 않고, emitter 측에서 에러를 감지하여 처리를 하려면 어떻게 해야 할까요?
 
-Flows는 `exception`에 투명해야합니다. `flow {...}` 빌더를 `try/catch` 블럭 안에서 사용하여 값을 emit하는 것은 `exception`에 투명하지 못한 행위입니다. `exception`에 투명하다는 말은, emitter에서 발생한 에러는 다른 곳에서 발생한 에러와 섞이지 않으며 emitter가 발생한 `exception`이라는 것이 훤히 보여야 한다는 말로 이해할 수 있습니다. collector측에서 try/catch로 다 잡아낸다고 생각해보세요. emitter가 발생한 exception이든 collector가 발생한 exception이든 상관없이 퉁쳐서 에러를 처리하게 될 가능성이 큽니다.
+모든 Flows 구현체는 `exception`에 투명해야합니다. `flow {...}` 빌더를 `try/catch` 블럭 안에서 사용하여 값을 emit하는 것은 `exception`에 투명하지 못한 행위입니다. `exception`에 투명하다는 말은, downstream에서 발생한 에러를 미리 처리하여 collector가 알 수 없게끔 되어서는 안된다는 의미이기 때문입니다. 에러가 났더라도 어떤 형태로든 collector가 알아차릴 수 있어야 합니다.
+
+[Roman Elizarov 블로그](https://medium.com/@elizarov/exceptions-in-kotlin-flows-b59643c940fb)의 표현으로는, downstream에서 발생한 항상 에러는 항상 collector로 전파되어야 한다고 나와있는데, 꼭 에러 객체가 그대로 전파되어야만 한다는 의미는 아닌것 같습니다. downstream에서 에러가 났을 때 collector가 어떤 방식으로도 전혀 몰라서는 안된다는 의미인 것 같습니다.
 
 emitter는 catch 연산자를 통하여 exception transparency를 유지할 수 있고 `exception` 처리를 캡슐화 할 수 있습니다. catch 연산자 안에서 예외를 분석하여 어떤 예외가 포착되었는지에 따라 다른 방식으로 대응할 수 있습니다.
 
