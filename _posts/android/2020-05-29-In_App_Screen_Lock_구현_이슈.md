@@ -6,9 +6,9 @@ tags: [ScreenLock, ProcessLifecycleOwner, Lifecycle, LifecycleObserver]
 comments: true
 ---
 
-# 앱 자체 화면 잠금(Lock Screen 구현)
+# 앱 자체 잠금 화면(Lock Screen 구현)
 
-**앱 내 자체 화면이란, 안드로이드 설정 메뉴에서 잠금 화면을 설정하는게 아닌, 자신의 앱을 켜고 끌 때마다 나타나는 잠금 화면을 말한다.**
+**앱 내 자체 잠금 화면이란, 안드로이드 설정 메뉴에서 잠금 화면을 설정하는게 아닌, 자신의 앱을 켜고 끌 때마다 나타나는 잠금 화면을 말한다.**
 
 <img src="https://user-images.githubusercontent.com/18481078/83267688-8d71cf80-a1ff-11ea-8640-20eaa2e34137.png" width="250" height="500">
 
