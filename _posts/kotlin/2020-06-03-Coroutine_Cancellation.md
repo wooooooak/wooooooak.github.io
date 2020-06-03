@@ -56,7 +56,7 @@ while
 ...
 ```
 
-위 코드를 보면 분명 `cancel()` 해주는 코드가 있지만, `"while"`만 계속 찍히며 종료되지 않는다. 사실 위 코드가 왜 취소되지 않고 영원히 동작하는가를 파악하지 못했다는 건, 코루틴 Cancellaion에 대한 이해 부족도 있지만 코드 플로우를 잘 따라가지 못한 것도 한 몫 한다.
+위 코드를 보면 분명 `cancel()` 해주는 코드가 있지만, `"while"`만 계속 찍히며 종료되지 않는다. 사실 위 코드가 왜 취소되지 않고 영원히 동작하는가를 파악하지 못했다는 건, 코루틴 `Cancellation`에 대한 이해 부족도 있지만 코드 플로우를 잘 따라가지 못한 것도 한 몫 한다.
 
 `launch`로 실행한 코루틴은 메인 쓰레드에서 돌아간다. 코드가 실행되면 `launch`로 코루틴을 실행 시키고 곧바로 `delay`를 만나는데, `delay`는 `suspend`함수이기 때문에 다른 코루틴으로 제어권을 넘긴다. 이때 제어권을 넘겨받은 또다른 코루틴, 즉, 아까 메인 쓰레드에서 `launch`했던 `while`문 코드가 실행이 되는데, 이 `while`문은 조건이 항상 `true`라서 사실상 메인 쓰레드를 계속 해서 잡고 있는 것이다. `delay`에서 걸어준 1초가 끝이 났지만, `while`이 thread를 계속해서 사용 중임으로 `resume`되지 못한다. 따라서 앱이 종료되지 않음은 물론이고 `"main: I'm tired of waiting!"` 문장도 찍히지 않는 것이다.
 
@@ -82,12 +82,12 @@ main: I'm tired of waiting!
 
 `runBlocking` 내의 코드는 메인 쓰레드에서, `launch` 코루틴은 다른 쓰레드에서 돌아가기 때문에 백그라운드의 `while`문이 메인 쓰레드의 흐름을 방해하지 못한다. 따라서 `"main: I'm tired of waiting!"` 문장이 찍힌다. 곧바로 백그라운드 `job`을 `cancel`시키고, `job`이 종료될 때 까지 `join` 한다.
 
-일반적으로는 `job.cancel()` 을 호출 했으니 취소되어 곧바로 `job.join()`으로 넘어갈 것이라고 생각할 수 있지만 실제로 코드는 그렇게 동작하지 않는다. 위 코드 역시 영원히 끝나지 않는다. 왜 일까?
+**일반적으로는 `job.cancel()` 을 호출 했으니 취소되어 곧바로 `job.join()`으로 넘어갈 것이라고 생각할 수 있지만 실제로 코드는 그렇게 동작하지 않는다.** 위 코드 역시 영원히 끝나지 않는다. 왜 일까?
 [공식문서](<[https://kotlinlang.org/docs/reference/coroutines/cancellation-and-timeouts.html#cancellation-is-cooperative](https://kotlinlang.org/docs/reference/coroutines/cancellation-and-timeouts.html#cancellation-is-cooperative)>)에는 이렇게 나와있다.
 
 **However, if a coroutine is working in a computation and does not check for cancellation, then it cannot be cancelled**
 
-즉, long running loop 작업을 실행 중인 코루틴이 있을 경우, 작업 중에 cancellaion을 체크하지 않는다면 취소되지 않는 다는 말이다. `cancel()`을 호출해도, 곧바로 코루틴이 완전히 종료되는게 아니라, loop내부에서 `isActive`가 `false`인지를 체크해서 명시적으로 종료 해야 한다는 것이다.
+즉, long running loop 같은 작업을 실행 중인 코루틴이 있을 경우, 작업 중에 cancellaion을 체크하여 취소해주지 않는다면 취소되지 않는 다는 말이다. `cancel()`을 호출해도, 곧바로 코루틴이 완전히 종료되는게 아니라, loop내부에서 `isActive`가 `false`인지를 체크해서 명시적으로 종료 해야 한다는 것이다.
 
 그렇다면 가장 처음에 보았던 공식 문서 예제는 어떻게 취소가 되었을까?
 
