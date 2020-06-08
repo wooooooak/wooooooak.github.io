@@ -21,14 +21,13 @@ sealed class의 효력은 `when`과 함께할 때 강력하게 나타난다. 우
 위의 코드는 `if`와 `when`이 식(expression)으로 사용 되어 값을 반환한다. 값을 반환하도록 사용되었기 때문에 `when` 에서는 꼭 `else`가 있어야만 한다. 만약 `else`가 없다면 `fruit`가 "apple", "orange", "banana"가 아닐 때 어떤 값을 반환해야 하는지 정할 수 없으므로 컴파일 에러가 난다.
 
 반면 `if`, `when`을 문(statement)로 사용할 때는 값을 반환하지 않는다. 아래 예제는 statement로 사용하는 예제이다.
-
-![carbon (3)](https://user-images.githubusercontent.com/18481078/84029264-11c90d00-a9cd-11ea-8f76-a74d5e74ea95.png)
+<img src="https://user-images.githubusercontent.com/18481078/84029264-11c90d00-a9cd-11ea-8f76-a74d5e74ea95.png" width="500" />
 
 앞선 예제와는 다르게 값을 반환하지 않는다. 따라서 `else`문이 없어도 상관없다. 조건에 해당하지 않으면 아무 일도 일어나지 않을 뿐 컴파일에러, 런 타임에러는 일어나지 않는다.
 
 `Sealed class`와 `when` expression을 함께 쓰는 경우를 상상해보자. `Sealed class`를 사용한 이유는 어떤 값이 특정한 카테고리 안에 속해 있음을 보장하기 위해서이다. UI를 그리는 코드를 작성하다 보면 데이터를 요청한 이후의 상태는 크게 세가지로 나눌 수 있을 것이다. loading이거나, 요청에 실패(Error)했거나, 성공(Success)하여 값을 받아왔거나. 이를 아래 처럼 나타낼 수 있고, 실제로 사용한다면 expression 보다는 statement로 사용할 일이 많다.
 
-![carbon (2)](https://user-images.githubusercontent.com/18481078/84029205-f9f18900-a9cc-11ea-9e2b-53f79376619d.png)
+<img src="https://user-images.githubusercontent.com/18481078/84029264-11c90d00-a9cd-11ea-8f76-a74d5e74ea95.png" width="400" />
 
 여기서 조심 해야할 부분은 `when`이 statement로 사용되었기 때문에, `uiState`가 `Loaindg`, `Error`, `Success`에 걸리지 않더라도 컴파일 에러가 나지 않고, 런 타임 때 코드는 아무런 행동도 하지 않는다는 것이다.
 
@@ -36,7 +35,7 @@ sealed class의 효력은 `when`과 함께할 때 강력하게 나타난다. 우
 
 **먼 훗날 본인 혹은 다른 개발자가 UiState에 다른 상태를 추가하게 될 경우, 컴파일 에러를 발생시켜 이를 파악하고자 한다면 when을 식(expression)으로 사용할 수도 있다.**
 
-![carbon (1)](https://user-images.githubusercontent.com/18481078/84029089-cca4db00-a9cc-11ea-84f3-51378d4c1ca6.png)
+<img src="https://user-images.githubusercontent.com/18481078/84029089-cca4db00-a9cc-11ea-84f3-51378d4c1ca6.png" width="500" />
 
 ![image](https://user-images.githubusercontent.com/18481078/84029029-b39c2a00-a9cc-11ea-9513-51bf2fa15baa.png)
 
@@ -59,4 +58,4 @@ val <T> T.exhaustive: T
 
 바로 위에서 `let`을 사용하여 statement를 expression으로 대체한 원리와 같다. exhaustive라는 의미와 부가적인 코드가 없기 때문에 가독성이 좋고 추후 혼란을 일으킬 여지가 없어보인다.
 
-![carbon](https://user-images.githubusercontent.com/18481078/84028630-09bc9d80-a9cc-11ea-86e7-ec4e06d696ef.png)
+<img src="https://user-images.githubusercontent.com/18481078/84028630-09bc9d80-a9cc-11ea-86e7-ec4e06d696ef.png" width="500" />
