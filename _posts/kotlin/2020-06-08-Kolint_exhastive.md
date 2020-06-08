@@ -12,9 +12,9 @@ comments: true
 
 `Sealed class`가 익숙하지 않다면 [공식문서](<[https://kotlinlang.org/docs/reference/sealed-classes.html](https://kotlinlang.org/docs/reference/sealed-classes.html)>)를 참조하자.
 
-## when + sealed class
+## when
 
-sealed class의 효력은 `when`과 함께할 때 강력하게 나타난다. 우선 `when`의 특징을 간략하게 짚고 넘어가보자. `when`은 `if`와 마찬가지로 식(expression)과 문(statement)로 사용이 가능하다. 식으로 쓰인다는 말은 반환되는 값이 있다는 말로 이해할 수 있다. 아래의 예제를 보자.
+우선 `when`의 특징을 간략하게 짚고 넘어가보자. `when`은 `if`와 마찬가지로 식(expression)과 문(statement)로 사용이 가능하다. 식으로 쓰인다는 말은 반환되는 값이 있다는 말로 이해할 수 있다. 아래의 예제를 보자.
 
 ![carbon (4)](https://user-images.githubusercontent.com/18481078/84029300-1f7e9280-a9cd-11ea-9ddc-ede225094cf7.png)
 
@@ -25,7 +25,9 @@ sealed class의 효력은 `when`과 함께할 때 강력하게 나타난다. 우
 
 앞선 예제와는 다르게 값을 반환하지 않는다. 따라서 `else`문이 없어도 상관없다. 조건에 해당하지 않으면 아무 일도 일어나지 않을 뿐 컴파일에러, 런 타임에러는 일어나지 않는다.
 
-`Sealed class`와 `when` expression을 함께 쓰는 경우를 상상해보자. `Sealed class`를 사용한 이유는 어떤 값이 특정한 카테고리 안에 속해 있음을 보장하기 위해서이다. UI를 그리는 코드를 작성하다 보면 데이터를 요청한 이후의 상태는 크게 세가지로 나눌 수 있을 것이다. loading이거나, 요청에 실패(Error)했거나, 성공(Success)하여 값을 받아왔거나. 이를 아래 처럼 나타낼 수 있고, 실제로 사용한다면 expression 보다는 statement로 사용할 일이 많다.
+## when + sealed class
+
+`Sealed class`의 효력은 `when`과 함께할 때 강력하게 나타난다. `Sealed class`와 `when` expression을 함께 쓰는 경우를 상상해보자. `Sealed class`를 사용하는 이유는 어떤 값이 특정한 카테고리 안에 속해 있음을 보장하기 위해서이다. UI를 그리는 코드를 작성하다 보면 데이터를 요청한 이후의 상태는 크게 세가지로 나눌 수 있을 것이다. **loading**이거나, 요청에 **실패(Error)** 했거나, **성공(Success)** 하여 값을 받아왔거나. 이를 아래 처럼 나타낼 수 있고, 실제로 사용한다면 expression 보다는 statement로 사용할 일이 많다.
 
 <img src="https://user-images.githubusercontent.com/18481078/84029264-11c90d00-a9cd-11ea-8f76-a74d5e74ea95.png" width="400" />
 
