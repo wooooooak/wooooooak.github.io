@@ -12,11 +12,6 @@ title: About
 - Kotlin
 - Android
 - Functional Programming
-- React
-- Node.js
-- Typescript
-- Frontend
-- UI UX
 
 * Reading
 * Football
