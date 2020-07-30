@@ -8,7 +8,7 @@ comments: true
 
 ### 카카오톡 이모티콘 컨테이너 UI 모습
 
-<img src="https://user-images.githubusercontent.com/18481078/88927681-bde2f200-d2b2-11ea-8282-304e4d2a3183.gif" width="180" height="390">
+<img src="https://user-images.githubusercontent.com/18481078/88927681-bde2f200-d2b2-11ea-8282-304e4d2a3183.gif" width="200" height="440">
 
 # 서론
 
@@ -18,7 +18,7 @@ comments: true
 
 ## 어색한 UI
 
-<img src="https://user-images.githubusercontent.com/18481078/88930201-1b2c7280-d2b6-11ea-97e9-261803eafcb8.gif" width="180" height="390">
+<img src="https://user-images.githubusercontent.com/18481078/88930201-1b2c7280-d2b6-11ea-97e9-261803eafcb8.gif" width="200" height="440">
 
 카카오톡 이모티콘 컨테이너 UI에 대해서 깊게 살펴보지 않았을 때에는 단순하게 구현 했었다. UI도 UI지만 우선은 기능 개발이 급했기 때문에, 1.키보드 내림 → 2.이모티콘 컨테이너 띄움 순서로 구현해 놓았다.
 그러나 이런 UI는  
@@ -157,7 +157,7 @@ val heightExceptKeyboard = visibleFrameSize.bottom - visibleFrameSize.top
 
 최종적으로 이렇게 구한 `keyboardHeight` 를 이모티콘 컨테이너의 `height`로 할당해주면 된다.
 
-<img src="https://user-images.githubusercontent.com/18481078/88928722-1bc40980-d2b4-11ea-9d06-52c74a3ee147.gif" width="180" height="390">
+<img src="https://user-images.githubusercontent.com/18481078/88928722-1bc40980-d2b4-11ea-9d06-52c74a3ee147.gif" width="200" height="440">
 
 ## 끄
 
