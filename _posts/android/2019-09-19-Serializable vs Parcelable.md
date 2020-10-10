@@ -6,11 +6,11 @@ tags: [Serializable, Parcelable]
 comments: true
 ---
 
-안드로이드 개발을 하다보면 액티비티간 데이터를 공유해야 할 경우가 종종 생긴다. 이런 경우를 위해 우리는 intent를 하나 생성하고, 거기에 `putExtra()`로 데이터를 넣은 후 `startActivity(intent)`로 데이터 공유와 동시에 새로운 액티비티를 띄운다. String이나 Int등 Primitive Type은 그렇다 치더라도 내가 커스텀 객체의 경우에는 그 객체를 Serializable(직렬화가능) 하거나 Parcelable(포장가능?)한 객체로 만들어야만 보낼 수 있다.
+안드로이드 개발을 하다보면 액티비티간 데이터를 공유해야 할 경우가 종종 생긴다. 이런 경우를 위해 우리는 intent를 하나 생성하고, 거기에 `putExtra()`로 데이터를 넣은 후 `startActivity(intent)`로 데이터를 공유함과 동시에 새로운 액티비티를 띄운다. String이나 Int등 Primitive Type은 그렇다 치더라도 직접 만든 커스텀 객체의 경우에는 그 객체를 Serializable(직렬화가능)하거나 Parcelable(포장가능?)한 객체로 만들어야만 보낼 수 있다.
 
 ### 직렬화란?
 
-직렬화(serialization)란, 객체를 저장장치에 저장하거나 네트워크를 통해 전송하기 위해 텍스트나 이진 형식으로 변환하는 것이다.
+직렬화(serialization)란, 객체를 저장 장치에 저장 혹은 네트워크 전송을 위해 텍스트나 이진 형식으로 변환하는 것이다.
 
 ```kotlin
 Person("JUN", 26) --> 직렬화 --> {"name":"JUN", "age":"26"}
@@ -30,7 +30,7 @@ Person("JUN", 26) --> 직렬화 --> {"name":"JUN", "age":"26"}
 
 ## Serializable
 
-Serializable은 표준 JAVA 인터페이스다.
+**Serializable은 표준 JAVA 인터페이스다.**
 
 Serializable를 사용해서 액티비티간 데이터를 공유하는 방법은 쉽다. 클래스가 Serializable를 구현하도록 해놓으면 끝이다. 이렇게 하면 기본적인 방법으로 Serializable를 사용하는 것이다.
 
@@ -56,7 +56,7 @@ public class MySerializable implements Serializable {
 
 ## Parcelable
 
-Parcelable은 안드로이드 SDK가 포함하고 있는 인터페이스다. Parcelable은 Serializable이 했던 Reflection을 사용하지 않도록 설계되어 있기 때문에 그만큼 개발자가 수동적으로 해줘야 할 작업들이 있다.
+**Parcelable은 안드로이드 SDK가 포함하고 있는 인터페이스다.** Parcelable은 Serializable이 했던 Reflection을 사용하지 않도록 설계되어 있기 때문에 그만큼 개발자가 수동적으로 해줘야 할 작업들이 있다.
 
 ```java
  public class MyParcelable implements Parcelable {
@@ -87,7 +87,7 @@ Parcelable은 안드로이드 SDK가 포함하고 있는 인터페이스다. Par
  }
 ```
 
-Serializable과는 다르게 꼭 구현해야 하는 필수 메서드들이 존재한다. 이 필수 메서드들을 작성하게 되면 액티비티로 데이터를 넘길 자격이 주어진다.
+Serializable과는 달리 꼭 구현해야 하는 필수 메서드들이 존재한다. 이 필수 메서드들을 작성하게 되면 액티비티로 데이터를 넘길 자격이 주어진다.
 
 Parcelable을 구현하는 과정이 귀찮아 보이지만, kotlin을 사용중이라면 귀찮은 작업이 줄어든다. `kotlin-android-extensions`플러그인을 사용하면 `@Parcelize`를 사용하여 아래와 같은 코드로 구현할 수 있다.
 
