@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Jeptpack ViewModel 내부 동작 원리
+title: Jetpack ViewModel 내부 동작 원리
 category: Android
 tags: [ViewModel, Jetpack]
 comments: true
