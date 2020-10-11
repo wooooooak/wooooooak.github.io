@@ -6,8 +6,6 @@ tags: [ViewModel, Jetpack]
 comments: true
 ---
 
-# Jetpack ViewModel 내부 동작 원리
-
 ## Jetpack ViewModel을 사용하는 이유
 
 화면 회전과 같은 configuration change가 발생하면 activity instance는 죽고, 다시 새로운 activity instance가 생성된다. instance의 hashcode 값 조차 다르다.
