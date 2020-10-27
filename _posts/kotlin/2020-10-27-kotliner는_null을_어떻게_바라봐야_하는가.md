@@ -107,7 +107,7 @@ null을 여기저기 어느 타입에도 끼워 넣을 수 있게 허용한 자�
 그렇다면 좀 더 나은 타입 시스템은 어떻게 생겼을까. 현재로써는 코틀린과 스위프트처럼 널을 허용하는 타입과 그렇지 않은 타입으로 나누는 것으로 보인다.
 
 ```kotlin
-var str1: String = null // 컴파일 실패
+var str1: String = null // 컴파일 에러
 var str2: String? = null // 컴파일 성공
 str2.split(':')  // 컴파일 에러
 str2?.split(':')  // 컴파일 성공
