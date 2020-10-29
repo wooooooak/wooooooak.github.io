@@ -29,19 +29,24 @@ comments: true
 
 `Sealed class`의 효력은 `when`과 함께할 때 강력하게 나타난다. `Sealed class`와 `when` expression을 함께 쓰는 경우를 상상해보자. `Sealed class`를 사용하는 이유는 어떤 값이 특정한 카테고리 안에 속해 있음을 보장하기 위해서이다. UI를 그리는 코드를 작성하다 보면 데이터를 요청한 이후의 상태는 크게 세가지로 나눌 수 있을 것이다. **loading**이거나, 요청에 **실패(Error)** 했거나, **성공(Success)** 하여 값을 받아왔거나. 이를 아래 처럼 나타낼 수 있고, 실제로 사용한다면 expression 보다는 statement로 사용할 일이 많다.
 
-<img src="https://user-images.githubusercontent.com/18481078/84029264-11c90d00-a9cd-11ea-8f76-a74d5e74ea95.png" width="400" />
+<img src="https://user-images.githubusercontent.com/18481078/97513888-b7a70380-19d0-11eb-8f75-6ace77898839.png" width="500" />
 
-여기서 조심 해야할 부분은 `when`이 statement로 사용되었기 때문에, `uiState`가 `Loaindg`, `Error`, `Success`에 걸리지 않더라도 컴파일 에러가 나지 않고, 런 타임 때 코드는 아무런 행동도 하지 않는다는 것이다.
+여기서 조심 해야할 부분은 `when`이 statement로 사용되었기 때문에, `uiState`가 `Loaindg`, `Error`, `Success`에 걸리지 않더라도 컴파일 에러가 나지 않고, 런 타임 때 코드는 아무런 행동도 하지 않는다는 것이다. 물론 지금 상황에선 `uiState`는 세가지 상태만 존재하니 무조건 조건에 걸릴것이다.
 
-**다른 누군가가 필요에 의하여 `UiState`에 `Retry`라는 상태 값을 추가하면 어떻게 될까?** 바로 위의 when문에서 컴파일 에러를 띄워주지 않기 때문에 Retry 상태 체크를 까먹을 확률이 매우 높다. `else`를 사용할 수 있긴 하지만 `Retry`가 아니라 다른 값이 추가된다면 그에 대응하지 못한다.
+### 변화 대응에 안전한 코드로 만들기
 
-**먼 훗날 본인 혹은 다른 개발자가 UiState에 다른 상태를 추가하게 될 경우, 컴파일 에러를 발생시켜 이를 파악하고자 한다면 when을 식(expression)으로 사용할 수도 있다.**
-
+**다른 누군가가 필요에 의하여 `UiState`에 `Retry`라는 상태 값을 추가하면 어떻게 될까?**
 <img src="https://user-images.githubusercontent.com/18481078/84029089-cca4db00-a9cc-11ea-84f3-51378d4c1ca6.png" width="500" />
+
+아까 보안던 when문에서 컴파일 에러를 띄워주지 않기 때문에 Retry 상태 체크를 까먹을 확률이 매우 높다. `else`를 사용할 수 있긴 하지만 `Retry`가 아니라 다른 값이 추가된다면 그에 대응하지 못한다.
+
+**먼 훗날 본인 혹은 다른 개발자가 UiState에 다른 상태를 추가하게 될 경우, 컴파일 에러를 발생시켜 이를 파악하고자 한다면 아래처럼 when을 식(expression)으로 사용할 수도 있다.**
 
 ![image](https://user-images.githubusercontent.com/18481078/84029029-b39c2a00-a9cc-11ea-9513-51bf2fa15baa.png)
 
-`when`을 식으로 사용하면 꼭 값을 반환해야 하기에 `Retry`를 체크하라는 에러가 뜬다. 그러나 좋은 방법은 아닌 것 같다. 먼 훗날 hello라는 변수를 보면 "사용하지도 않는 변수가 왜 있지?"라며 **코드의 가독성을 해칠 가능성이 보인다.** 또 다른 방법으로는 아래 이미지와 같이 `let`을 사용하는 방법이 있는데, 이것 역시 먼 훗날 다른 개발자가 보기에는 혼란을 일으킬 수 있는 코드이다.
+`when`을 식으로 사용하면 꼭 값을 반환해야 하기에 `Retry`를 체크하라는 에러가 뜬다. 그러나 좋은 방법은 아닌 것 같다. 먼 훗날 hello라는 변수를 보면 "사용하지도 않는 변수가 왜 있지?"라며 **코드의 가독성을 해칠 가능성이 보인다.**
+
+또 다른 방법으로는 아래 이미지와 같이 `let`을 사용하여 컴파일 에러를 유발할 수 있는데, 이것 역시 먼 훗날 다른 개발자가 보기에는 혼란을 일으킬 수 있는 코드이다.
 
 ![image](https://user-images.githubusercontent.com/18481078/84028959-98c9b580-a9cc-11ea-991a-d3f1359c0768.png)
 
