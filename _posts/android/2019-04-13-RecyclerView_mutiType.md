@@ -14,24 +14,31 @@ comments: true
 아래로 스크롤을 내리면 카테고리 2번도 있는데...(풀 스크린 찍는 방법을 모르겠다ㅠ)
 
 아무튼 이번 예제에서는 총 3개의 다른 뷰 형태를 가지는 리사이클러 뷰를 다뤄볼 것이다. 세가지 다른 뷰 형태란 아래와 같다.
-* 단순 카테고리 명을 표시하는, 텍스트만 있는 뷰
-* 글 아래에 이미지가 크게 박힌 뷰
-* 사진 오른쪽에 사진 제목과 컨텐츠 내용이 담긴 뷰 
+
+- 단순 카테고리 명을 표시하는, 텍스트만 있는 뷰
+- 글 아래에 이미지가 크게 박힌 뷰
+- 사진 오른쪽에 사진 제목과 컨텐츠 내용이 담긴 뷰
 
 ## 사전 준비
+
 recyclerView와 cardView, material디자인을 설치할 것이다. 아래코드를 그냥 복사 붙여넣기해도 되지만, 시간이 지남에따라 버전업 되는 부분은 알아서 할 수 있으리라 믿는다.
+
 ```gradle
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
 ```
+
 또한, 코드중에 snow라는 이름의 이미지 파일을 사용하는데, 인터넷에 아무 사진이나 다운받아서 프로젝트에 넣어도 무방하고, [깃헙](https://github.com/wooooooak/recyclerView2-tutorial)의 예제코드를 그대로 다운받아서 실행해봐도 무방하다.
 
 ## 프로젝트 구조
+
 ![프로젝트구조](/public/img/android/recycler2_5.png)
 
 ## layout
+
 우선 가장 먼저 리사이클러뷰를 담을 메인 layout은 아래와 같다.
+
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -88,6 +95,7 @@ toolbar를 사용하기 때문에 style파일로 들어가서 아래와 같이 `
 위에서 언급한 3가지 뷰 타입에 대해서 각각의 레이아웃을 살펴보자.
 
 #### 카테고리명을 담당할 뷰 레이아웃 (text_type.xml)
+
 ```xml
 <LinearLayout
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -108,7 +116,9 @@ toolbar를 사용하기 때문에 style파일로 들어가서 아래와 같이 `
     />
 </LinearLayout>
 ```
+
 #### 제목 아래에 사진이 크게 박혀있는 뷰 레이아웃 (image_type)
+
 ```xml
 <com.google.android.material.card.MaterialCardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -140,6 +150,7 @@ toolbar를 사용하기 때문에 style파일로 들어가서 아래와 같이 `
 ```
 
 #### 진 오른쪽에 사진 제목과 컨텐츠 내용이 담긴 뷰 레이아웃 (image_type2.xml)
+
 ```xml
 <com.google.android.material.card.MaterialCardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -187,8 +198,11 @@ toolbar를 사용하기 때문에 style파일로 들어가서 아래와 같이 `
 프로젝트에 필요한 세가지 뷰 레이아웃 작성은 모두 끝났다. 이제 [이전 포스트](https://wooooooak.github.io/android/2019/03/28/recycler_view/)에서도 그랬듯이 데이터를 만들고, 어댑터를 만들어주고, 레이아웃 매니저만 정해주면 끝난다.
 
 ## Kotlin Code
+
 ### model
+
 `Model.kt` 클래스는 랜더링 하고 싶은 데이터를 가지고 있을 클래스이다.
+
 ```kotlin
 data class Model(val type: Int, val text: String, val data: Int, val contentString: String?) {
     companion object {
@@ -197,13 +211,15 @@ data class Model(val type: Int, val text: String, val data: Int, val contentStri
         const val IMAGE_TYPE_2 = 2
     }
 }
-````
-* **첫 번째 인자 값** : 우리가 만든 3가지 형태의 뷰들 중, 어떤 형태의 뷰인지 Int값으로 넘겨줄 것이다. 그 Int은 `ViewTypeEnum` 을 사용한다.
-* **두 번째 인자 값** : 텍스트를 입력받을 파라미터이다. 텍스트 하나만 랜더링 하는 뷰에서는 그 텍스트를, 텍스트1개 이미지1개인 뷰에서 텍스트를, 텍스트2 이미지1개인 뷰에서는 제목 부분을 담당할 String이다.
-* **세 번째 인자 값** : 이미지가 필요한 뷰라면 이미지를 넣어줄 파라미터.
-* **네 번째 인자 값** : 텍스트2 이미지1개인 `image_type1.xml` 뷰에서 제목 아래의 컨텐츠 부분의 값을 담당할 String이다.
+```
+
+- **첫 번째 인자 값** : 우리가 만든 3가지 형태의 뷰들 중, 어떤 형태의 뷰인지 Int값으로 넘겨줄 것이다. 그 Int은 `ViewTypeEnum` 을 사용한다.
+- **두 번째 인자 값** : 텍스트를 입력받을 파라미터이다. 텍스트 하나만 랜더링 하는 뷰에서는 그 텍스트를, 텍스트1개 이미지1개인 뷰에서 텍스트를, 텍스트2 이미지1개인 뷰에서는 제목 부분을 담당할 String이다.
+- **세 번째 인자 값** : 이미지가 필요한 뷰라면 이미지를 넣어줄 파라미터.
+- **네 번째 인자 값** : 텍스트2 이미지1개인 `image_type1.xml` 뷰에서 제목 아래의 컨텐츠 부분의 값을 담당할 String이다.
 
 ### MainActivity
+
 `MainActivity`는 [이전 포스트](https://wooooooak.github.io/android/2019/03/28/recycler_view/)와 동일하게 어댑터와 레이아웃 매니저를 설정해주는 부분이다. 더불어 데이터 리스트에 값을 만들어 어댑터에 넣어줄 것이다.
 
 ```kotlin
@@ -214,20 +230,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        val list = mutableListOf<Model>().apply {
-            add(Model(Model.TEXT_TYPE, "카테고리 1번!", 0, null))
-            add(Model(Model.IMAGE_TYPE, "텍스트뷰 아래에 이미지가 있는 뷰타입.", R.drawable.snow, null))
-            add(Model(Model.IMAGE_TYPE_2, "안녕, 제목부분이 될거야", R.drawable.snow, "내용부분!"))
-            add(Model(Model.IMAGE_TYPE, "다시 한 번 텍스트 옆에 이미지가 있는 뷰타입", R.drawable.snow, null))
-            add(Model(Model.IMAGE_TYPE_2, "제목2!!", R.drawable.snow, "사진에 대한 설명?"))
+        val list = listOf(
+            Model(Model.TEXT_TYPE, "카테고리 1번!", 0, null)
+            Model(Model.IMAGE_TYPE, "텍스트뷰 아래에 이미지가 있는 뷰타입.", R.drawable.snow, null)
+            Model(Model.IMAGE_TYPE_2, "안녕, 제목부분이 될거야", R.drawable.snow, "내용부분!")
+            Model(Model.IMAGE_TYPE, "다시 한 번 텍스트 옆에 이미지가 있는 뷰타입", R.drawable.snow, null)
+            Model(Model.IMAGE_TYPE_2, "제목2!!", R.drawable.snow, "사진에 대한 설명?")
 
-            add(Model(Model.TEXT_TYPE, "카테고리 2번!", 0, null))
-            add(Model(Model.IMAGE_TYPE, "새로운 카테고리 시작!.", R.drawable.snow, null))
-            add(Model(Model.IMAGE_TYPE, "다음생엔 울창한 숲의 이름모를 나무로 태어나 평화로이 살다가 누군가의 유서가 되고 싶다.", R.drawable.snow, null))
-            add(Model(Model.IMAGE_TYPE_2, "제목부분.", R.drawable.snow, "내용부분"))
-        }
+            Model(Model.TEXT_TYPE, "카테고리 2번!", 0, null)
+            Model(Model.IMAGE_TYPE, "새로운 카테고리 시작!.", R.drawable.snow, null)
+            Model(Model.IMAGE_TYPE, "다음생엔 울창한 숲의 이름모를 나무로 태어나 평화로이 살다가 누군가의 유서가 되고 싶다.", R.drawable.snow, null)
+            Model(Model.IMAGE_TYPE_2, "제목부분.", R.drawable.snow, "내용부분")
+        )
 
-        val adpater = MultiViewTypeAdapter(list, this)
+        val adpater = MultiViewTypeAdapter(list)
         recycler_view.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         recycler_view.adapter = adpater
     }
@@ -235,25 +251,26 @@ class MainActivity : AppCompatActivity() {
 ```
 
 ### 대망의 MultiViewTypeAdapter
+
 어쩌면 [이전 포스트](https://wooooooak.github.io/android/2019/03/28/recycler_view/)를 보던 중
+
 ```kotlin
 override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
     val view = LayoutInflater.from(parent.context).inflate(R.layout.item, parent, false)
     Log.d("tag1" , "onCreateViewHolder")
     return MyViewHolder(view)
 }
-````
-이부분의 `viewType`인자가 무엇인지 궁금했을 분이 계셨을 수도 있을것 같다. 정말 섬세하신분...
+```
+
+이부분의 `viewType`인자가 무엇일까.
 
 `viewType`변수명에서 느낄 수 있듯이 viewType이 구분되어 들어오는 값이다. 이 viewType은 어디서 넘어올까?
 
 `onCreateViewHolder`가 호출되기 전, `getItemViewType(position: Int): Int`함수가 먼저 호출되어 리턴 값이 넘겨지는 것이다. 따라서 우리는 이 함수에서 적절히 뷰타입을 구분하여 리턴해주면 된다. 뷰타입을 구분하는 방법이야 여러가지가 있겠지만, 우리는 처음 `Model`객체를 생성할 때 부터 첫 번째 인자로 `type` 값을 구분해서 넣어줬으므로 그대로 넘겨주면 된다.
 
 ```kotlin
-class MultiViewTypeAdapter(private val list: MutableList<Model>) :
+class MultiViewTypeAdapter(private val list: List<Model>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    private var totalTypes = list.size
 
     // getItemViewType의 리턴값 Int가 viewType으로 넘어온다.
     // viewType으로 넘어오는 값에 따라 viewHolder를 알맞게 처리해주면 된다.
@@ -277,7 +294,7 @@ class MultiViewTypeAdapter(private val list: MutableList<Model>) :
     }
 
     override fun getItemCount(): Int {
-        return totalTypes
+        return list.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -320,9 +337,10 @@ class MultiViewTypeAdapter(private val list: MutableList<Model>) :
 }
 ```
 
-결국 뷰홀더를 여러개 만들고, `onCreateViewHolder`에서 데이터에 따라 그에 맞는 뷰홀더를 생성해주는게 전부이다. 
+결국 뷰홀더를 여러개 만들고, `onCreateViewHolder`에서 데이터에 따라 그에 맞는 뷰홀더를 생성해주는게 전부이다.
 
 사실 뷰 타입을 `Model`의 `compaion object`로, 또 숫자로 관리한다는 게 좋진 않지만 여러개의 뷰 타입을 다루는 리사이클러 뷰를 공부하는데는 지장이 없다. 더 좋은 코드로 리팩토링 하고자 한다면, [github](https://github.com/wooooooak/recyclerView2-tutorial)에서 소스를 다운받은 후, [Android RecyclerView Multiple Layout Sealed Class 포스팅 - 영문](https://www.codexpedia.com/android/android-recyclerview-multiple-layout-sealed-class/)이나, [Kotlin Sealed class를 사용한 UI 상태 관리 포스팅](https://medium.com/@lazysoul/kotlin-sealed-class%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%9C-ui-%EC%83%81%ED%83%9C-%EA%B4%80%EB%A6%AC-1-3-98cf37207c13)을 읽고 스스로 리팩토링 해보는 것도 좋은 방법이 될 것 같다.
 
 ## 끄
+
 읕
