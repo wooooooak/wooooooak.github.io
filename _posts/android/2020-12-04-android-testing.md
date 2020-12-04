@@ -159,7 +159,7 @@ class MyViewModel: ViewModel() {
 }
 ```
 
-위의 코드는 default Dispatcher가 Dispatchers.main으로 설정된 `viewModelScope.launch`로 코루틴을 실행한다. 이코드를 테스트하기 위해 아래와 같은 테스트 코드가 작성될 것이다.
+위의 코드는 default Dispatcher가 Dispatchers.main으로 설정된 `viewModelScope.launch`로 코루틴을 실행한다. 이 코드를 테스트하기 위해 아래와 같은 테스트 코드가 작성될 것이다.
 
 ```kotlin
 class MyViewModelTest: ViewModel() {
