@@ -51,7 +51,7 @@ AndroidX Test는 simulated android environment에서 테스트 전용 클래스�
 
 [AndroidJUnit4](https://developer.android.com/training/testing/junit-runner#kotlin)는 test runner다. 즉 테스트를 실행하는 주체다. junit은 이런 runner가 없이는 테스트가 실행되지 않으며, runner를 따로 지정해주지 않으면 기본 제공하는 runner로 실행된다. `@RunWith`를 사용하여 Runner를 교체할 수 있다.
 
-AndroidJUnit4는 AndroidX Test Library가 Local test와 Instrumented Test에서 서로 다르게 동작할 수 있도록 도와준다. `Context`를 얻을 때, local test에서는 `simulated context`를 제공하고, instrumeted test에서는 실제 `context`를 제공할 수 있는 이유가 AndroidJUnit4 Runner 덕분이다. 따라서 AndroidJUnit4 test runner없이 AndroidX Test를 사용하면 제대로 동작하지 않을 가능성이 크다. 따라서 AndroidX Test 라이브러리를 사용할 땐 AndroidJUnit4 라이브러리를 사용하자.
+AndroidJUnit4는 AndroidX Test Library가 Local test와 Instrumented Test에서 서로 다르게 동작할 수 있도록 도와준다. `Context`를 얻을 때, local test에서는 `simulated context`를 제공하고, instrumeted test에서는 실제 `context`를 제공할 수 있는 이유가 AndroidJUnit4 Runner 덕분이다. 따라서 AndroidJUnit4 test runner없이 AndroidX Test를 사용하면 제대로 동작하지 않을 가능성이 크다. AndroidX Test 라이브러리를 사용할 땐 AndroidJUnit4 라이브러리를 사용하자.
 
 ## Rule
 
