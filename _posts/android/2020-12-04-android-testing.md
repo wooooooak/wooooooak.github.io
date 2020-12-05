@@ -23,7 +23,7 @@ comments: true
 
 ## [AndroidX Test Library](https://developer.android.com/training/testing/set-up-project)
 
-순수한 ViewModel은 android framework가 제공하는 어떤 것도 의존하지 않는다. 그러나 어떤 불가피한 이유로 viewModel에 Application `context`가 필요하다면 어떡해야할까?
+순수한 ViewModel은 android framework가 제공하는 어떤 것도 의존하지 않는다. 그러나 어떤 불가피한 이유로 viewModel이 Application `context`에 의존한다면 테스트 코드에서는 이를 어떻게 주입해야할까?
 
 [AndroidX Test Library](https://developer.android.com/training/testing/set-up-project)가 이를 해결해준다. AndrodX Test Library는 테스트 전용 Component(Application, Activity 등)들과 메서드들을 제공해준다. local test중에 테스트용 Android framework class들이 필요하다면 이를 사용하자.
 
