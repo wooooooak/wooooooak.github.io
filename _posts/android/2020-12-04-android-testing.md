@@ -19,7 +19,7 @@ comments: true
 
 잘 설계된 아키텍쳐를 기반으로 앱을 설계하게되면, 굳이 Android framework class에 의존하지 않는 layer들이 있다. view에 표현될 data들을 가지고 로직적인 장난만 치는 viewModel, 앱의 핵심 기능을 담은 domin layer의 클래스 등등 여러 객체들은 local에서 테스트 해도 문제가 없으며 오히려 권장된다.
 
-`Activity`나 `Service`와 같은 Android Framework Component 자체를 테스트 하려면 Instrumented test로 해야하지만, 단지 그들을 의존하고 있다면 의존 객체를 mocking하여 local test로 돌릴 수 있다.
+`Activity`나 `Service`와 같은 Android Framework Component 자체를 테스트 할 경우 때에따라 Instrumented test로 해야만 할 수도 있지만, 단지 그들을 의존하고 있다면 의존 객체를 mocking하여 local test로 돌릴 수 있다.
 
 ## [AndroidX Test Library](https://developer.android.com/training/testing/set-up-project)
 
