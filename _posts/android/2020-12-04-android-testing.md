@@ -244,19 +244,12 @@ testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
 ## 참고자료
 
 - [Testing Android Applications - Kayvan Kaseb](https://medium.com/kayvan-kaseb/testing-android-applications-b95a4a72f2f9)
-
 - [Kotlin Coroutines in Android — Unit Test](https://medium.com/swlh/kotlin-coroutines-in-android-unit-test-28ff280fc0d5)
-
 - [Codelabs - Advanced Android in Kotlin: Testing Basics](https://developer.android.com/codelabs/advanced-android-kotlin-training-testing-basics#0)
-
 - [kotlinx.coroutines](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/)
-
 - [Test apps on Android - google developer](https://developer.android.com/training/testing/fundamentals)
-
 - [architecture-samples - github](https://github.com/android/architecture-samples)
-
 - [Testing Coroutines — Dispatchers - Ralf Stuckert](https://medium.com/@ralf.stuckert/testing-coroutines-dispatchers-956969cfd374)
-
 - [Testing Coroutines — Introduction - Ralf Stuckert](https://medium.com/@ralf.stuckert/testing-coroutines-introduction-4ab6733c7599)
 
 ## 끄
