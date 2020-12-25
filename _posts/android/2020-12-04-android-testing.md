@@ -181,7 +181,7 @@ java.lang.IllegalStateException: Module with the Main dispatcher had failed to i
 For tests Dispatchers.setMain from kotlinx-coroutines-test module can be used
 ```
 
-`InstantTaskExecutorRule` 설명에서도 나왔듯이 `viewModelScope.launch`가 사용하는 Dispatcher.main은 Android main looper를 사용하기 때문에 local test에서는 사용할 수 없다. 이럴땐 [kotlinx-coroutines-test](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/)에서 제공하는 [TestCoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-dispatcher/)를 사용하여 해결할 수 있다.
+`InstantTaskExecutorRule` 설명에서도 나왔듯이 `viewModelScope.launch`가 사용하는 Dispatcher.main은 Android main looper를 사용하기 때문에 local test에서는 사용할 수 없다. 이럴땐 [kotlinx-coroutines-test](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/)에서 제공하는 [TestCoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/-test-coroutine-dispatcher/)를 사용하여 해결할 수 있다. `kotlinx-coroutines-test`는 coroutine testing 전용으로 만들어진 라이브러리이다.
 
 ```kotlin
 @ExperimentalCoroutinesApi
@@ -202,7 +202,7 @@ class MyViewModelTest {
     }
 
     @Test
-    fun testSomething() = runBlocking {
+    fun testSomething() = runBlockingTest {
         ...
     }
 }
@@ -237,9 +237,18 @@ fun MainCoroutineRule.runBlockingTest(block: suspend () -> Unit) =
 
 TestCoroutineDispatcher를 사용하려면 kotlinx-coroutines-test 라이브러리를 추가해야한다.
 
-```
+```groovy
 testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
 ```
+
+## runBlockingTest
+
+바로 위의 코드에서 `runBlockingTest()` 함수를 사용했다. [kotlinx-coroutines-test](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/kotlinx.coroutines.test/run-blocking-test.html)는 coroutines test library에서 제공되는 함수로써 특별한 점이 있다.
+
+1. 코드 블럭을 특별한 coroutine context에서 실행하여 동기적으로 즉각 실행한다.
+2. delay() 함수가 사용된다면, 실제 delay 시간 만큼 기다리지 않고 테스트를 실행한다. 즉 모든 pending task들을 즉각 실행하며 가상의 clock-time을 딜레이된 시간으로 조정한다.
+
+즉 테스트 코드에서는 대부분 실제로 delay만큼 기다릴 필요가 없기 떄문에 `runBlockingTest()` 함수를 사용하여 테스트 코드 시간을 단축 시킬 수 있다.
 
 ## 참고자료
 
