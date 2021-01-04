@@ -6,6 +6,8 @@ tags: [Kotest, Data Driven Testing]
 comments: true
 ---
 
+**원본 - [Data Driven Testing with Kotest](https://proandroiddev.com/data-driven-testing-with-kotlintest-a07ac60e70fc)**
+
 미리 정의된 입력&출력 값 Set을 사용하여 동일한 테스트를 반복해서 빠르게 실행하는 것을 [data driven testing](http://spockframework.org/spock/docs/1.1/data_driven_testing.html), [table driven testing](https://github.com/golang/go/wiki/TableDrivenTests) 또는 [table driven property checks](https://www.scalatest.org/user_guide/table_driven_property_checks)라고 부릅니다. 뭐라고 부르던지 Kotest는 이 테스트 패러다임을 훌륭하게 지원하며 이 글에서 그런 테스트를 어떻게 작성하는지를 다루려고 합니다.
 
 두 integer 값 중 큰 값을 반환하는 max 함수 테스트를 생각해보죠. 일반적인 테스트 방식으로는 함수를 여러번 호출할 것입니다.
