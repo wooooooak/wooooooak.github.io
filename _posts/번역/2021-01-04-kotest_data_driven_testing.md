@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [번역] Data Driven Testing with Kotest
+title: Data Driven Testing with Kotest(번역)
 category: 번역
 tags: [Kotest, Data Driven Testing]
 comments: true
