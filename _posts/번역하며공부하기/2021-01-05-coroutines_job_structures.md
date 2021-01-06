@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Coroutines Job Structures(번역)
-category: 번역
+category: 번역하며 공부하기
 tags: [Coroutines, Supervisor Job]
 comments: true
 ---
