@@ -18,7 +18,7 @@ Android Context는 Android에서 가장 중요한 객체 중 하나입니다. Co
 
 ### Application Context
 
-이 Context는 application의 생명주기에 종속되어있습니다. 즉 application이 죽지 않고 살아있는 한, 사용 가능하다는 뜻이죠. 이 컨텍스트는 application 클래스의 `getApplicationContext()`함수를 통해 접근할 수 있는 싱글톤 객체입니다. 중요한 점은 UI와 관련된 컨텍스트가 아니라는 점입니다. 따라서 intent를 사용하여 activity를 시작하거나, toast를 보여준다거나, 기타 UI와 관련된 작업을 하신다면 application Context를 사용하시면 안됩니다. 한편 수명이 긴 객체나 쓰레드에서 activity 참조를 가지고 있으면 메모리 누수가 발생할 수 있으니 조심하세요. 이럴떄야말로 application Context를 사용할 때입니다. 아래는 application context의 기능들입니다.
+이 Context는 application의 생명주기에 종속되어있습니다. 즉 application이 죽지 않고 살아있는 한, 사용 가능하다는 뜻이죠. 이 컨텍스트는 application 클래스의 `getApplicationContext()`함수를 통해 접근할 수 있는 싱글톤 객체입니다. 중요한 점은 UI와 관련된 컨텍스트가 아니라는 점입니다. 따라서 intent를 사용하여 activity를 시작하거나, toast를 보여준다거나, 기타 UI와 관련된 작업을 하신다면 application Context를 사용하시면 안됩니다. 한편 수명이 긴 객체나 쓰레드에서 activity 참조를 가지고 있으면 메모리 누수가 발생할 수 있으니 조심하세요. 이럴 때야 말로 application Context를 사용할 때입니다. 아래는 application context의 기능들입니다.
 
 - resource value들을 Load
 - service 시작
@@ -39,11 +39,13 @@ Activity Context는 명확히 Activity의 생명 주기에 바인딩 되어 있�
 - broadcast 전송
 - braodcastReceiver 등록
 
-위에서 언급한 두 가지 컨텍스트 외에서 `getBaseContext()` 와 `this` 를 사용하여 Context에 접근하는 것을 보셨을겁니다. `getBaseContext()` 는 ContextWrapper의 메서드인데요, ContextWrapper는 단순히 모든 모든 context 호출을 다른 context로 위임하는 프록시 구현체입니다. original Context를 변경하지 않고 동작을 수정하기 위해서 subclassed 될 수 있습니다.
+---
+
+위에서 언급한 두 가지 컨텍스트 외에서 `getBaseContext()` 와 `this` 를 사용하여 Context에 접근하는 것을 보셨을겁니다. `getBaseContext()` 는 ContextWrapper의 메서드인데요, ContextWrapper는 단순히 모든 context 호출을 다른 context로 위임하는 프록시 구현체입니다. original Context를 변경하지 않고 동작을 수정하기 위해서 subclassed 될 수 있습니다.
 
 `getBaseContext()` 를 사용하면 ContextWrapper 클래스에 존재하는 Context를 가져올 수 있습니다.
 
-또한 this는 객체를 참조하며 Activity 내의 context가 필요할 때면 언제든지 사용할 수 있습니다. 아래는 Context를 요청하는 자바와 코틀린 코드입니다.
+또한 `this`는 아시다시피 객체를 참조하는 것인데요, Activity 내의 context가 필요할 때면 언제든지 사용할 수 있습니다. 아래는 Context를 요청하는 자바와 코틀린 코드입니다.
 
 ```kotlin
 // 액티비티에서 다른 액티비티를 시작하려 한다면, `this`를 넘기세요.
