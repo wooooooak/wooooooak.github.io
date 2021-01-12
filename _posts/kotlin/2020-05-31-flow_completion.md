@@ -69,4 +69,4 @@ Caught exception
 
 ## Successful completion
 
-`onCompletion`이 `catch`와 다른 점은, `onCompletion`은 항상 모든 예외를 받는다는 점입니다. 성공적으로 collection이 완료 되었더라도 `nul`l을 수신하고 코드가 실행되는 반면, catch는 전혀 실행되지 않습니다.
+`onCompletion`이 `catch`와 다른 점은, `onCompletion`은 항상 모든 예외를 받는다는 점입니다. 성공적으로 collection이 완료 되었더라도 `null`을 수신하고 코드가 실행되는 반면, catch는 전혀 실행되지 않습니다.
