@@ -2,7 +2,7 @@
 layout: post
 title: 7 Gotchas When Explore Kotlin Coroutine(번역)
 category: 번역하며 공부하기
-tags: [Compose, Animation]
+tags: [Coroutine]
 comments: true
 ---
 
