@@ -80,7 +80,7 @@ class MyViewModel: ViewModel() {
 }
 ```
 
-위와 코드가 있을때 주의할 점은, [postValue](https://developer.android.com/reference/android/arch/lifecycle/LiveData#postvalue)이 백그라운드 Thread에서 일을 수행한다는 것이다.
+위와 코드가 있을때 주의할 점은, [postValue](https://developer.android.com/reference/android/arch/lifecycle/LiveData#postvalue)가 백그라운드 Thread에서 일을 처리한다는 것이다.
 `MyViewModelTest.kt` 에서는 `myViewModel.method1()` 수행 이후 liveData의 value가 제대로 변했는지 확인하고자 할 것이다. 그러나 백그라운드에서 작업으로인한 비동기 처리 때문에 값이 변경되기도 전에 테스트가 끝나버려 실패하게 된다. 이럴때 사용하는 것이 [InstantTaskExecutorRule](https://developer.android.com/reference/androidx/arch/core/executor/testing/InstantTaskExecutorRule)이다.
 
 [InstantTaskExecutorRule](https://developer.android.com/reference/androidx/arch/core/executor/testing/InstantTaskExecutorRule) : 모든 [Architecture Components](https://developer.android.com/topic/libraries/architecture)-related background 작업을 백그라운드에서가 아닌 동일한 Thread에서 돌게하여 동기적인 처리가 가능하도록 해준다.
@@ -101,7 +101,7 @@ java.lang.NullPointerException
     ...
 ```
 
-`LiveData.setValue()`는 내부적으로 `isMailThread()`함수를 사용하여 현재 쓰레드가 메인 쓰레드인지를 확인한다. local test에서는 당연하게도 real Android환경이 아니기 때문에 MainThread(=UiThread)를 사용하지 못한다(Android MainThread는 android.os의 Looper를 사용). 그래서 에러가 난다.
+`LiveData.setValue()`는 내부적으로 `isMainThread()`함수를 사용하여 현재 쓰레드가 메인 쓰레드인지를 확인한다. local test에서는 당연하게도 real Android환경이 아니기 때문에 MainThread(=UiThread)를 사용하지 못한다(Android MainThread는 android.os의 Looper를 사용). 그래서 에러가 난다.
 
 그렇다면 `InstantTaskExecutorRule`을 사용하더라도 MainThread(UiThread)를 사용하는 건 아니니까 여전히 에러가 나야하지 않을까?라는 의문이 떠오른다. 그래서 Rule의 내부를 타고 들어가보니 `isMainThread()`가 `true`로 하드코딩 되어있는걸 확인할 수 있었다.
 
