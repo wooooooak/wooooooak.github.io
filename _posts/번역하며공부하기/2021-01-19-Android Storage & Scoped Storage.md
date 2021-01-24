@@ -118,4 +118,4 @@ if (availableBytes >= NUM_BYTES_NEEDED_FOR_MY_APP) {
 }
 ```
 
-[Part 2](https://medium.com/swlh/android-file-storage-file-provider-5990c9baf52d) 에서는 앱을 하나 만들어 보면서 우리가 다루었던 주제들을 실험해 보겠습니다. 또한 File Provider API도 알아봅니다.
+[Part 2](https://wooooooak.github.io/%EB%B2%88%EC%97%AD%ED%95%98%EB%A9%B0%20%EA%B3%B5%EB%B6%80%ED%95%98%EA%B8%B0/2021/01/23/Android-File-Storage-&-File-Provider/) 에서는 앱을 하나 만들어 보면서 우리가 다루었던 주제들을 실험해 보겠습니다. 또한 File Provider API도 알아봅니다.
