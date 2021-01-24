@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Android File Storage & File Provider
+title: Android File Storage & File Provider(번역)
 category: 번역하며 공부하기
 tags: [Android Storage]
 comments: true
