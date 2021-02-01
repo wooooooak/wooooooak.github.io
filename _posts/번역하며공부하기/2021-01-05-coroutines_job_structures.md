@@ -187,10 +187,10 @@ scope 위에서 자식 coroutine들을 만드는 것은 다 이유가 있고 이
 
 ```kotlin
 val scope = CoroutineScope(
-            Dispatchers.IO +
-            CoroutineExceptionHandler { _, _, _
-                // exception will be given here
-            }
+    Dispatchers.IO +
+    CoroutineExceptionHandler { _, _, _
+        // exception will be given here
+    }
 )
 
 scope.launch { ... }
@@ -223,19 +223,19 @@ scope.launch { ... }  <--- Cancel upon exception
 
 ```kotlin
 val scope1 = CoroutineScope(
-            Dispatchers.IO +
-            CoroutineExceptionHandler { _, _, _
-                // exception will NOT be given here
-            }
+    Dispatchers.IO +
+    CoroutineExceptionHandler { _, _, _
+        // exception will NOT be given here
+    }
 )
 
 scope1.launch { ... }
 
 scope1.launch {
-      val scope2 = CoroutineScope(Dispatchers.IO)
-      scope2.launch {
-            throw Exception()
-       }
+    val scope2 = CoroutineScope(Dispatchers.IO)
+    scope2.launch {
+        throw Exception()
+    }
 }
 ```
 
@@ -250,20 +250,20 @@ val supervisorJob = SupervisorJob()
 val scope = CoroutineScope(Dispatchers.IO + supervisorJob)
 
 val job1 = scope.launch {
-              while(isActive) {
-                 delay(2000)
-              }
-           }
+    while(isActive) {
+        delay(2000)
+    }
+}
 
 val job2 = scope.launch {
-              throw Exception()
-            }
+    throw Exception()
+}
 
 val job3 = scope.launch {
-              while(isActive) {
-                 delay(2000)
-              }
-           }
+    while(isActive) {
+        delay(2000)
+    }
+}
 ```
 
 위 코드에서는 scope가 SupervisorJob을 사용하고 있습니다. 그리고 그 scope에서 3개의 코루틴을 실행시켰고 두 번째 코루틴에서는 Exception을 던지고 있습니다. 이 경우에 이전 예제들과는 달리 다른 코루틴들은 영향을 받지 않고 계속 자신의 일을 유지합니다.
