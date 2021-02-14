@@ -36,12 +36,12 @@ class ListViewAdapter(context: Context) : ArrayAdapter<Data>(context, R.layout.i
 잘 동작하는 코드이긴 한데요, 혹시 잘못된 점이 보이시나요? 잘 보시면 매번 view를 inflating하고 있어요. 이는 `ListView`를 스크롤 할 때 마다 성능에 큰 영향을 미칩니다. 이를 최적화 하기 위해서 `Adapter` 인터페이스, 특히 `getView` 메서드를 살펴볼 필요가 있습니다. `convertView` 파라미터는 nullable이고, 주석은 아래와 같아요.
 
 ```kotlin
-가능하다면 재사용 될 old view.
+재사용 될 수도 있는 old view.
 주의: 이것을 사용할 때는 non-null인지 확인해야 하고, 올바른 타입을 확인해야합니다.
 만약 이 view가 올바른 데이터를 뿌리도록 변환할 수 없다면, 이 메서드는 새로운 view를 생성할 수 있습니다.
 ```
 
-"재사용 될 old view"라고 언급되어있습니다. adapter는 사용자 화면 밖으로 나간 view를 재생성하는 게 아니라 **재사용(재활용)** 합니다. 이는 사용자가 더 부드럽게 스크롤 할 수 있게끔 해줍니다.
+"재사용 될 old view"라고 언급되어있습니다. adapter는 사용자 화면 밖으로 나간 view를 재생성하는 게 아니라 **재활용(재사용)** 합니다. 이는 사용자가 더 부드럽게 스크롤 할 수 있게끔 해줍니다.
 
 ![Checkout excalidraw!](https://user-images.githubusercontent.com/18481078/107643403-6f7acb00-6cb9-11eb-93a9-763d6ed96f4a.png)
 
@@ -452,4 +452,4 @@ class RecyclerViewAdapter(
 
 ---
 
-어떻게 Adapter의 API가 `ArrayAdatper`로 시작하여 `ListAdapter`로 진화되어왔는지 이해하셨기를 바랍니다. 아직 [ListAdapter](https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter)를 사용해 보시지 않으셨다면 꼭 써보시길 추천드리구요, 이때까지 얼마나 많은 작업들을 직접 해왔는지, 이를 사용함으로써 코드 퀄리티가 어떻게 향상되는지를 느껴보시기 바랍니다.
+어떻게 Adapter의 API가 `ArrayAdatper`로 시작하여 `ListAdapter`로 진화되어왔는지 이해하셨기를 바랍니다. 아직 [ListAdapter](https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter)를 사용해 보시지 않으셨다면 꼭 써보시길 추천드리구요, 이때까지 얼마나 많은 작업들을 손수 해왔는지, 이를 사용함으로써 코드 퀄리티가 얼마나 향상되는지를 느껴보시기 바랍니다.
