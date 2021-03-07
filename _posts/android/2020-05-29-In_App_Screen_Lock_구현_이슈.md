@@ -18,9 +18,9 @@ comments: true
 "사용자가 어떤 액티비티를 보고 있다가 잠시 화면을 나가고 재진입 할 줄 모르니, `BaseActivity`의 `onStart`에서 `ScreenLockActivity`를 띄우자."
 그러나 이 생각대로 구현하게 된다면, A 액티비티가 B 액티비티를 호출할 때도 B 액티비티의 `onStart`에서 `ScreenLockActivity`를 띄울 테니 내가 원하는 형태가 아님을 쉽게 생각할 수 있었다.
 
-떠오르는게 액티비티 또는 프래그먼트의 라이프사이클 뿐이라면 `BaseActivity`의 `onStart`()에서 어떻게든 처리할 수는 있을 것이다. screen on&off에 대한 이벤트를 브로드캐스트를 등록하여 받고, 단순 액티비티간 호출일 때는 예외 처리를 하고, 여러가지 상태 값들을 sharedPreference로 관리하여 구현하면 안될건 없다.
+떠오르는게 액티비티 또는 프래그먼트의 라이프사이클 뿐이라면 `BaseActivity`의 `onStart()`에서 어떻게든 처리할 수는 있을 것이다. screen on&off에 대한 이벤트를 브로드캐스트를 등록하여 받고, 단순 액티비티간 호출일 때는 예외 처리를 하고, 여러가지 상태 값들을 sharedPreference로 관리하여 구현하면 안될건 없다.
 
-그러나 좀 더 단순하게, 더 멀리서 내다보면 앱 내에서 ScreenLockActivity를 띄워줘야 할 때는 앱이 **Background에서 Foregrounde로 진입할 때 뿐**이라는 사실을 알아차릴 수 있다. 힘들게 브로드 캐스트를 등록하지 않고도, 단순 액티비티 간의 이동일 때를 구분하지 않아도 된다. 액티비티나 프레그먼트의 라이프사이클이 아니라 앱 라이프사이클을 감지하는 `ProcessLifecycleOwner` 를 사용하면 간단하게 처리가 가능하다.
+그러나 좀 더 단순하게, 더 멀리서 내다보면 앱 내에서 ScreenLockActivity를 띄워줘야 할 때는 앱이 **Background에서 Foreground로 진입할 때 뿐**이라는 사실을 알아차릴 수 있다. 힘들게 브로드 캐스트를 등록하지 않고도, 단순 액티비티 간의 이동일 때를 구분하지 않아도 된다. 액티비티나 프레그먼트의 라이프사이클이 아니라 앱 라이프사이클을 감지하는 `ProcessLifecycleOwner` 를 사용하면 간단하게 처리가 가능하다.
 
 ## ProcessLifecycleOwner
 
@@ -62,7 +62,7 @@ class ScreenLockActivity: Activity() {
 }
 ```
 
-함수 이름은 의미가 없다. `@OnLifecycleEvent` 어노테이션이 중요하다. `ON_START`는 앱이 포그라운드에 진입할 때 호출되며, `ON_STO`P은 백그라운드로 진입하면 호출된다. 앱이 포그라운드에 진입할 때마다 `ScreenLockActivity`를 start 시켜주면 된다.
+함수 이름은 의미가 없다. `@OnLifecycleEvent` 어노테이션이 중요하다. `ON_START`는 앱이 포그라운드에 진입할 때 호출되며, `ON_STOP`은 백그라운드로 진입하면 호출된다. 앱이 포그라운드에 진입할 때마다 `ScreenLockActivity`를 start 시켜주면 된다.
 
 이제 `ProcessLifecycleOwner` 를 이용하여 `AppLifecycleObserver`를 등록하자.
 
@@ -86,7 +86,7 @@ Activity나 Fragment에서 등록한게 아니라, **Application클래스에서 
 바로 위에서 **"거의 흡사하게" 라는 표현을 썻다.**
 높지 않은 확률이지만 위의 코드에는 ScreenLockActivity를 무시한 채 앱에 진입할 수 있는 심각한 버그가 있다. 사실은 그 **버그와 그것을 해결하는 방법**이 이 포스팅의 핵심이다.
 
-App Process LifeCycle에 대해 잘 모른다면, 아마도 사용자가 비밀번호를 입력하지 않고 뒤로가기를 눌렀을 때 앱을 종료시키기 위해 ScreenLockActivity의 onBackKeyPressed()에다가 finishAffinity()를 작성할 것이다.
+App Process LifeCycle에 대해 잘 모른다면, 아마도 사용자가 비밀번호를 입력하지 않고 뒤로가기를 눌렀을 때 앱을 종료시키기 위해 ScreenLockActivity의 `onBackKeyPressed()`에다가 `finishAffinity()`를 작성할 것이다.
 
 ```kotlin
 // ScreenLockActivity.kt
