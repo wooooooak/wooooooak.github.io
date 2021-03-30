@@ -20,7 +20,7 @@ Singleton은 클래스가 단일 객체를 가지고 있고, 그 객체에 대�
 
 ## Singleton In Java
 
-클래스가 단일 객체를 가지고 있음을 보장하려면 object를 생성에 직접 관여를 해야합니다. 단일 객체를 가진 클래스를 만드려면, 생성자를 `private`으로 하고 그 object 접근에 대해 `static`하게 접근 할 수 있도록 만들어야 합니다. 한편 보통 싱글톤은 객체 생성 비용이 많이 들기 때문에 앱이 시작할 때 Singleton을 만들고 싶지는 않을 겁니다. 이런 상황을 위해 이미 생성된 객체가 있는지를 확인하는 static 메서드를 제공해줍니다. 이 메서드는 이미 생성된 instance가 있으면 그것을 반환하고, 없다면 새로 생성하여 반환합니다.
+클래스가 단일 객체를 가지고 있음을 보장하려면 object 생성에 직접 관여를 해야합니다. 단일 객체를 가진 클래스를 만드려면, 클래스 생성자를 `private`으로 하고 단일 object에 대해 `static`하게 접근 할 수 있도록 만들어야 합니다. 한편 보통 싱글톤은 객체 생성 비용이 많이 들기 때문에 앱이 시작할 때 Singleton을 만들고 싶지는 않을 겁니다. 이런 상황을 위해 이미 생성된 객체가 있는지를 확인하는 static 메서드를 제공해줍니다. 이 메서드는 이미 생성된 instance가 있으면 그것을 반환하고, 없다면 새로 생성하여 반환합니다.
 
 ```kotlin
 <!-- Copyright 2019 Google LLC.
@@ -40,7 +40,7 @@ public class Singleton{
 }
 ```
 
-위 코드는 겉보기엔 괜찮아 보일지 몰라도 thread-safe하지 못합니다. 하나의 쓰레드가 if문을 통과하였지만, 또다른 쓰레드가 싱글톤을 생성하고 있었다면 작업을 잠시 멈추게 될 수 있습니다. 그러다가 다시 if문 안에서 resume되면, 그때는 또 다른 instance를 만들게 되겠죠.
+위 코드는 겉보기엔 괜찮아 보일지 몰라도 `thread-safe`하지 못합니다. 하나의 쓰레드가 if문을 통과하였지만, 다른 쓰레드가 싱글톤을 생성하고 있었다면 작업을 잠시 멈추게 될 수 있습니다. 그러다가 다시 if문 안에서 resume되면, 그때는 또 다른 instance를 만들게 되겠죠.
 
 ```kotlin
 <!-- Copyright 2019 Google LLC.
@@ -64,7 +64,7 @@ public class Singleton{
 }
 ```
 
-이문제를 해결하기 위해 double checked locking을 사용할 수 있습니다. 이를 사용하면 instance가 `null`일 때, `synchronized` 키워드가 lock을 걸고, 두 번쨰 if문에서 instance가 정말로 null인지를 다시 체크합니다. 만약 instance가 null이라면 Singleton을 만듭니다. 그러나 이것 만으로도 충분하진 않습니다. instance를 `volatile`로 선언해줘야합니다. [Volitile](https://en.wikipedia.org/wiki/Double-checked_locking#Usage_in_Java) 키워드는 변수가 동시에 동작하는 쓰레드들로 인해 비동기적으로 수정될 수 있음을 컴파일러에게 알려줍니다.
+이문제를 해결하기 위해 double checked locking을 사용할 수 있습니다. 이를 사용하면 instance가 `null`일 때, `synchronized` 키워드가 lock을 걸고, 두 번째 if문에서 instance가 정말로 `null`인지를 다시 체크합니다. 만약 instance가 `null`이라면 Singleton을 만듭니다. 그러나 이것 만으로도 충분하진 않습니다. instance를 `volatile`로 선언해줘야합니다. [Volitile](https://en.wikipedia.org/wiki/Double-checked_locking#Usage_in_Java) 키워드는 변수가 동시에 동작하는 쓰레드들로 인해 비동기적으로 수정될 수 있음을 컴파일러에게 알려줍니다.
 
 이 모든것은 여러분이 싱글톤이 필요할 때마다 작성해야 하는 보일러 플레이트 코드입니다. 사실 간단한 작업임에도 불구하고 코드는 꽤나 복잡하네요. 그래서 자바에서는 대부분 enum을 사용하여 싱글톤을 만들기도 합니다.
 
@@ -104,7 +104,7 @@ class Singleton private constructor() {
 }
 ```
 
-우리의 예상대로 코드가 변환되었지만 이걸 좀 더 간단하게 변경할 수 있습니다. 간단하게 하기 위해서 생성자와 companion 키워드를 지우고 object 키워드를 클래스명 앞에 붙여주세요. object와 `companion objects`의 차이는 글 아래에서 다루도록 할게요.
+우리의 예상대로 코드가 변환되었지만 이걸 좀 더 간단하게 변경할 수 있습니다. 간단하게 하기 위해서 생성자와 companion 키워드를 지우고 `object` 키워드를 클래스명 앞에 붙여주세요. `object`와 `companion objects`의 차이는 글 아래에서 다루도록 할게요.
 
 ```kotlin
 <!-- Copyright 2019 Google LLC.
@@ -115,13 +115,14 @@ object Singleton {
 
     fun count() {
         count++
+    }
 }
 
 ```
 
 `count()` 메서드를 사용하고 싶다면, Singleton object를 통해서 접근할 수 있습니다. 코틀린에서 `object`는 단일 instance를 가지는 특별한 클래스입니다. class 대신 `object`키워드를 사용하여 class를 만들면, 코틀린 컴파일러는 생성자를 private하게 만들어주고, object에 대한 static reference를 만들어주고, static block 안에서 reference를 초기화 해줍니다.
 
-Static block은 static field에 처음 접근할 때 딱 한번만 호출됩니다. JVM은 static block을 처리할 때, 비록 `synchronized`키워드가 없다고 하더라도 synchronized block과 매우 비슷하게 다룹니다. Singleton 클래스가 초기화 될 때, JVM synchronized block위에서 lock을 획득하여 다른 쓰레드가 동시에 접근할 수 없도록 해줍니다. lock이 풀릴때면 Singleton 객체는 이미 생성이 되었고 static block은 두번 다시는 수행되지 않습니다. 이렇게 Singleton 객체가 단 하나만 있음을 보장하게 됩니다. 게다가 이 object는 thread-safe함과 동시에 object에 처음 접근하는 순간 생성됩니다(lazliy-created).
+**Static block**은 static field에 처음 접근할 때 딱 한번만 호출됩니다. JVM은 static block을 처리할 때, 비록 `synchronized`키워드가 없다고 하더라도 synchronized block과 매우 비슷하게 다룹니다. Singleton 클래스가 초기화 될 때, JVM synchronized block위에서 lock을 획득하여 다른 쓰레드가 동시에 접근할 수 없도록 해줍니다. lock이 풀릴때면 Singleton 객체는 이미 생성이 되었고 static block은 두번 다시는 수행되지 않습니다. 이렇게 Singleton 객체가 단 하나만 있음을 보장하게 됩니다. 게다가 이 object는 thread-safe함과 동시에 object에 처음 접근하는 순간 생성됩니다(lazliy-created).
 
 그럼 디컴파일된 Kotlin byte code를 살펴보고 실제로 어떤 일이 일어났는지 확인해봅시다.
 
@@ -148,7 +149,7 @@ public final class Singleton {
 }
 ```
 
-그러나 object도 한계가 있습니다. object 선언은 생성자를 가질 수 없기에 파라미터를 받을 수가 없습니다. 만약 파라미터를 받을수 있다고 하더라도, 생성자에 전달된 non-static 파라미터는 static block에서 접근할 수 없기 때문에 의미가 없을 겁니다.
+그러나 object도 한계가 있습니다. object 선언은 생성자를 가질 수 없기에 파라미터를 받을 수가 없습니다. 만약 파라미터를 받을 수 있다고 하더라도, 생성자에 전달된 non-static 파라미터는 static block에서 접근할 수 없기 때문에 의미가 없을 겁니다.
 
 > static 초기화 블록은 다른 static method처럼 오직 클래스의 static property에만 접근할 수 있습니다. Static block은 객체 생성 전에 호출되기 때문에 객체의 property나 생성자로 받아온 파라미터를 사용할 수 없습니다.
 
