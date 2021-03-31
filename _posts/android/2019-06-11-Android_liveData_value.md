@@ -14,13 +14,13 @@ AAC ViewModel을 사용하면서 구글이 제공하는 LiveData를 많이 사�
 
 ## postValue()
 
-역시 값을 set하는 함수이지만, 그 과정이 백그라운드에서 진행된다고 보면 된다. 내부적으로 `new Handler(Looper.mainLooper()).post(() -> setValue())` 이런 코드가 실행된다. 마지막으로 값을 변경하는 쓰레드는 메인스레드이긴 하다. 공식문서에는 아래와 같이 설명되어있다.
+백그라운드 thread인 상황에서 LiveData 값을 set 하고 싶을 때가 있다. 그럴 때 사용하는 메서드이다. 내부적으로 `new Handler(Looper.mainLooper()).post(() -> setValue())` 이런 코드가 실행된다. 즉 setting하고 싶은 값을 main lopper로 보내끼 때문에 결국 메인 쓰레드에서 값을 변경하게 된다. 공식문서에는 아래와 같이 설명되어있다.
 
 > If you need set a value from a background thread, you can use postValue(Object)
 > Posts a task to a main thread to set the given value.
 > If you called this method multiple times before a main thread executed a posted task, only the last value would be dispatched.
 
-따라서 postValue()를 한 다음 바로 다음 라인에서 LiveData의 getValue()를 호출한다면, 변경된 값을 받아오지 못할 가능성이 크다(거의 대부분 받아오지 못는데, 100%인지는 모르겠다). 반면 setValue()로 값을 변경하면 메인쓰레드에서 변경하는 것이기 때문에 바로 다음 라인에서 `getValue()`로 변경된 값을 읽어올 수 있다.
+따라서 postValue()를 한 다음 바로 다음 라인에서 LiveData의 getValue()를 호출한다면, 변경된 값을 받아오지 못할 가능성이 크다. 반면 setValue()로 값을 변경하면 메인쓰레드에서 변경하는 것이기 때문에 바로 다음 라인에서 `getValue()`로 변경된 값을 읽어올 수 있다.
 
 아래의 코드를 보자.
 
