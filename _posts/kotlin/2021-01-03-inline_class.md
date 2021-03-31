@@ -69,7 +69,7 @@ fun main() {
 
 Inline class와 Type aliase는 타입에 대해 새로운 이름을 부여하고, 런타임에 원래 타입으로 사용된다는 공통점이 있다.
 
-그러나 차이는 존재한다. type aliase는 기존 타입과 Aliase 타입의 호환성이 보장되는 반면 Inline class는 기존 타입과 Inline class를 명확히 구분짓기 때문에 호환되지 않는다. 즉 inline class는 완전히 새로운 type을 만드는 거라고 볼 수 있고, type aliase는 그저 원래 있던 타입에 별칭을 붙여주는 것 뿐이다.
+그러나 차이는 존재한다. type aliase는 기존 타입과 Aliase 타입의 호환성이 보장되는 반면 **Inline class는 기존 타입과 Inline class를 명확히 구분짓기 때문에 호환되지 않는다.** 즉 inline class는 완전히 새로운 type을 만드는 거라고 볼 수 있고, type aliase는 그저 원래 있던 타입에 별칭을 붙여주는 것 뿐이다.
 
 공식문서에 나와있는 예제를 보면 이해하기 수월하다.
 
