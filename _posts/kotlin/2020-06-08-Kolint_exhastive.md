@@ -8,7 +8,7 @@ comments: true
 
 프로그래밍을 하다보면 열거형(Enum)이 필요할 때가 굉장히 많다. 대표적인 예로 요일(월,화,수...일)이나 방향(동,서,남,북)처럼 특정 카테고리 안에서 열거할 수 있는 값들을 나타낼 때 쓰인다. 더 나아가서 우리가 창조해낸 객체지향 세상에서 얼마든지 다양한 열거형들이 추가로 생겨날 수 있다.
 
-코틀린에서는 언어 자체에서 `Sealed class`라는 개념을 지원하기 때문에 Enum을 사용할 일은 거의 없다. Enum을 사용하면 각각의 타입을 나타내는 값들이 싱글톤으로 인식되는 반면, `Sealed class`를 사용하면 얼마든지 동일한 타입의 객체를 생성해 낼 수 있으며, 싱글톤으로도 사용이 가능하다.
+코틀린에서는 언어 자체에서 `Sealed class`라는 개념을 지원한다. Enum을 사용하면 각각의 타입을 나타내는 값들이 싱글톤으로 인식되는 반면, `Sealed class`를 사용하면 특정 타입의 객체를 여러개 생성해 낼 수 있으며, 싱글톤으로도 사용이 가능하다.
 
 `Sealed class`가 익숙하지 않다면 [공식문서](<[https://kotlinlang.org/docs/reference/sealed-classes.html](https://kotlinlang.org/docs/reference/sealed-classes.html)>)를 참조하자.
 

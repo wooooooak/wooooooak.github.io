@@ -20,7 +20,7 @@ fun exampleFunc() {
             if (value == 0) return
             print("value ")
         }
-    }
+    )
 }
 
 // 1 2 3
