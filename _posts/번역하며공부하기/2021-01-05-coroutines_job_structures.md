@@ -21,8 +21,8 @@ class MyViewModel(
 ): ViewModel {
       fun getData() {
         viewModelScope.launch {
-            launch {  ... }
-            launch {  ...  }
+            launch { ... }
+            launch { ... }
             repo1.getData()
             repo2.getData()
         }
@@ -202,10 +202,10 @@ scope.launch {
 
 ```kotlin
 val scope = CoroutineScope(
-        Dispatchers.IO +
-        CoroutineExceptionHandler { _, _ ->
-            // exception will be given here
-        }
+    Dispatchers.IO +
+    CoroutineExceptionHandler { _, _ ->
+        // exception will be given here
+    }
 )
 
 scope.launch { ... }   <--- Cancel upon exception
@@ -273,36 +273,35 @@ val job3 = scope.launch {
 
 ```kotlin
 class MyViewModel(
-      repo1: MyRepository1,
-      repo2: MyRepository2
+    repo1: MyRepository1,
+    repo2: MyRepository2
 ): ViewModel {
 
-      fun getData() {
+    fun getData() {
         viewModelScope.launch {
             launch {  ... }
             launch {  ...  }
             repo1.getData()
             repo2.getData()
         }
-      }
+    }
 }
 
 class MyRepository1 {
+    val coroutineScope = CoroutineScope(Dispatchers.IO)
 
-      val coroutineScope = CoroutineScope(Dispatchers.IO)
-
-      fun getData() {
+    fun getData() {
         coroutineScope.launch {  ...  }
-      }
+    }
 }
 
 class MyRepository2(
-      val lifecycleScope: LifecycleCoroutineScope
+    val lifecycleScope: LifecycleCoroutineScope
 ) {
 
-      fun getData() {
-          lifecycleScope.launch(Dispatcers.IO) {  ...  }
-      }
+    fun getData() {
+        lifecycleScope.launch(Dispatcers.IO) {  ...  }
+    }
 }
 ```
 
@@ -310,7 +309,7 @@ class MyRepository2(
 
 ```kotlin
 val ViewModel.viewModelScope: CoroutineScope
-     get() {
+    get() {
         val scope: CoroutineScope? = this.getTag(JOB_KEY)
         if (scope != null) {
             return scope
@@ -320,7 +319,7 @@ val ViewModel.viewModelScope: CoroutineScope
             CloseableCoroutineScope(
                 SupervisorJob() + Dispatchers.Main
             ))
-        }
+    }
 ```
 
 `viewModelScope` 는 SupervisorJob을 사용하여 scope를 만듭니다. 이것은 이전에 살펴본 것과 같이 자식 코루틴 중 하나가 error를 던진다 하여도 scope의 Job이 취소되지 않음을 의미합니다.
