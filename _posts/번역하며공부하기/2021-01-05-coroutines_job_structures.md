@@ -16,10 +16,9 @@ Android에서 coroutine을 사용한다고 가정해봅시다. 아마 우리는 
 
 ```kotlin
 class MyViewModel(
-      repo1: MyRepository1,
-      repo2: MyRepository2
+    repo1: MyRepository1,
+    repo2: MyRepository2
 ): ViewModel {
-
       fun getData() {
         viewModelScope.launch {
             launch {  ... }
@@ -31,20 +30,19 @@ class MyViewModel(
 }
 
 class MyRepository1 {
+    val coroutineScope = CoroutineScope(Dispatchers.IO)
 
-      val coroutineScope = CoroutineScope(Dispatchers.IO)
-
-      fun getData() {
+    fun getData() {
         coroutineScope.launch {  ...  }
-      }
+    }
 }
 
 class MyRepository2(
-      val lifecycleScope: LifecycleCoroutineScope
+    val lifecycleScope: LifecycleCoroutineScope
 ) {
-      fun getData() {
-          lifecycleScope.launch(Dispatcers.IO) {  ...  }
-      }
+    fun getData() {
+        lifecycleScope.launch(Dispatcers.IO) {  ...  }
+    }
 }
 ```
 
@@ -65,7 +63,7 @@ val job1 = scope.launch { ... }
 
 val job2 = scope.launch { ... }
 
-val job2 = scope.launch { ... }
+val job3 = scope.launch { ... }
 ```
 
 이 예제에는 4개의 서로 다른 job들이 생성되어있습니다. launch의 리턴으로 생성되는 잡 3개와, scope자체의 job 1개죠. scope의 Job에 접근하는 방법은 아래와 같습니다.
@@ -93,7 +91,7 @@ val job2 = scope.launch {
     while(isActive) {  delay(3000)  }
  }
 
-val job2 = scope.launch {
+val job3 = scope.launch {
     while(isActive) {  delay(3000)  }
 }
 
@@ -196,7 +194,7 @@ val scope = CoroutineScope(
 scope.launch { ... }
 
 scope.launch {
-      throw Exception()
+    throw Exception()
 }
 ```
 
@@ -204,16 +202,16 @@ scope.launch {
 
 ```kotlin
 val scope = CoroutineScope(
-            Dispatchers.IO +
-            CoroutineExceptionHandler { _, _ ->
-                // exception will be given here
-            }
+        Dispatchers.IO +
+        CoroutineExceptionHandler { _, _ ->
+            // exception will be given here
+        }
 )
 
 scope.launch { ... }   <--- Cancel upon exception
 
 scope.launch {  <--- Cancel upon exception
-      throw Exception()
+    throw Exception()
 }
 
 scope.launch { ... }  <--- Cancel upon exception
@@ -313,16 +311,16 @@ class MyRepository2(
 ```kotlin
 val ViewModel.viewModelScope: CoroutineScope
      get() {
-         val scope: CoroutineScope? = this.getTag(JOB_KEY)
-          if (scope != null) {
-               return scope
-         }
-          return setTagIfAbsent(
-                  JOB_KEY,
-                   CloseableCoroutineScope(
-                            SupervisorJob() + Dispatchers.Main
-                   ))
-          }
+        val scope: CoroutineScope? = this.getTag(JOB_KEY)
+        if (scope != null) {
+            return scope
+        }
+        return setTagIfAbsent(
+            JOB_KEY,
+            CloseableCoroutineScope(
+                SupervisorJob() + Dispatchers.Main
+            ))
+        }
 ```
 
 `viewModelScope` 는 SupervisorJob을 사용하여 scope를 만듭니다. 이것은 이전에 살펴본 것과 같이 자식 코루틴 중 하나가 error를 던진다 하여도 scope의 Job이 취소되지 않음을 의미합니다.
@@ -331,12 +329,12 @@ val ViewModel.viewModelScope: CoroutineScope
 
 ```kotlin
 fun getData() {
-      viewModelScope.launch {
-         launch {  ... } <---- Job 1
-         launch {  ...  }  <---- Job 2
-         repo1.getData()  <--- Standalone Job
-         repo2.getData() <---- Job 3
-      }
+    viewModelScope.launch {
+        launch {  ... } <---- Job 1
+        launch {  ...  }  <---- Job 2
+        repo1.getData()  <--- Standalone Job
+        repo2.getData() <---- Job 3
+    }
 }
 ```
 
@@ -346,7 +344,6 @@ fun getData() {
 
 ```kotlin
 class MyRepository1 {
-
     val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     fun getData() {
@@ -355,7 +352,6 @@ class MyRepository1 {
 }
 
 class MyRepository2(val lifecycleScope: LifeCycleScope) {
-
     fun getData() {
         lifecycleScope.launch(Dispatcers.IO) {  ...  }
     }
