@@ -262,6 +262,7 @@ val job3 = scope.launch {
         delay(2000)
     }
 }
+```
 
 위 코드에서는 `scope`가 `SupervisorJob`을 사용하고 있습니다. 그리고 그 `scope`에서 3개의 코루틴을 실행시켰고 두 번째 코루틴에서는 Exception을 던지고 있습니다. 이 경우에 이전 예제들과는 달리 다른 코루틴들은 영향을 받지 않고 계속 자신의 일을 유지합니다.
 또한 코루틴 라이브러리는 supervisorScope도 지원합니다.
