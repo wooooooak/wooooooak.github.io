@@ -1,10 +1,14 @@
 ---
 layout: post
-title: 람다식에서 return문 사용하기 (정확하게 알고 쓰자)
+title: 람다식에서 return문 사용하기
 category: Kotlin
 tags: [lambda, kotlin, scope]
 comments: true
 ---
+
+> 이 글에서는 람다식 내부에서 return을 만났을 때 실제로 return 되는 위치를 조절하는 방법을 다룬다.
+해당 포스팅에서는 다루지 않지만 람다에서 return문 자체를 사용할 수 없는 경우도 있는데, 자세히 알고 싶다면 [람다 내부의 return은 언제 불가능하며 이유는 무엇일까?](https://wooooooak.github.io/kotlin/2019/02/16/kotlin_label/) 포스팅을 읽어보는 것을 추천한다.
+
 
 코틀린은 함수형 프로그래밍을 지원하기 때문에 익명함수, 람다식을 사용할 경우가 흔하다. map, filter, reduce, forEach등 함수를 인자로 받는 함수들(고차함수)의 매개변수로 우리만의 로직이 담긴 함수를 넘길때 람다를 자주 사용한다. 자주 사용하는 만큼 꼭 집고 넘어가야할 사항이 있다.
 
@@ -102,5 +106,4 @@ fun exampleFunc5() {
 `forEach`를 감싸는 함수(`run`)를 선언하여, 조건에 맞을 경우 감싼 함수(`run`)을 종료시키면 된다.
 
 ## 끄
-
 읕
